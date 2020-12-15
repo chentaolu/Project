@@ -20,7 +20,6 @@ public class Client {
 
         } catch (IOException e) {
             e.printStackTrace();
-            finish();
         }
     }
 
@@ -33,7 +32,7 @@ public class Client {
             e.printStackTrace();
         }
     }
-
+    /*
     public String ReadMessage() {
         try {
             DataInputStream in = new DataInputStream(this.client.getInputStream());
@@ -41,7 +40,8 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+        return read;
+    }*/
 
 }
 
