@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:background="@drawable/background"
     tools:context=".MainActivity">
+
     <!---
     <TextView
         android:layout_width="wrap_content"
@@ -16,30 +18,93 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     -->
+
+
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="152dp"
-        android:layout_height="57dp"
+        android:layout_width="114dp"
+        android:layout_height="43dp"
+        android:background="@color/black"
         android:text="@string/buttonLogin"
-        tools:layout_editor_absoluteX="129dp"
-        tools:layout_editor_absoluteY="74dp">
-
-    </Button>
+        tools:layout_editor_absoluteX="263dp"
+        tools:layout_editor_absoluteY="16dp"></Button>
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="112dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="122dp"
-        android:layout_marginTop="301dp"
-        android:layout_marginEnd="138dp"
-        android:layout_marginBottom="322dp"
+        android:id="@+id/searchRecipeButton"
+        android:layout_width="99dp"
+        android:layout_height="47dp"
+        android:backgroundTint="#8E2727"
         android:text="@string/buttonText"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        tools:layout_editor_absoluteX="278dp"
+        tools:layout_editor_absoluteY="87dp" />
 
+    <Button
+        android:id="@+id/searchVieoButton"
+        android:layout_width="99dp"
+        android:layout_height="47dp"
+        android:text="@string/buttonText"
+        tools:layout_editor_absoluteX="278dp"
+        tools:layout_editor_absoluteY="176dp" />
+
+    <Button
+        android:id="@+id/searchIngredientsButton"
+        android:layout_width="99dp"
+        android:layout_height="47dp"
+        android:text="@string/buttonText"
+        tools:layout_editor_absoluteX="278dp"
+        tools:layout_editor_absoluteY="258dp" />
+
+    <Button
+        android:id="@+id/searchNutrientsButton"
+        android:layout_width="169dp"
+        android:layout_height="54dp"
+        android:text="營養成分搜尋"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="355dp" />
+
+    <Button
+        android:id="@+id/searchRandomButton"
+        android:layout_width="169dp"
+        android:layout_height="54dp"
+        android:text="隨機食譜"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="355dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="182dp"
+        android:layout_height="40dp"
+        android:text="@string/title"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:typeface="monospace"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="19dp" />
+
+    <EditText
+        android:id="@+id/searchFood"
+        android:layout_width="255dp"
+        android:layout_height="55dp"
+        android:hint="搜尋食譜"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="87dp" />
+
+    <EditText
+        android:id="@+id/searchVideo"
+        android:layout_width="255dp"
+        android:layout_height="55dp"
+        android:hint="搜尋影片"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="176dp" />
+
+    <EditText
+        android:id="@+id/searchByIngredients"
+        android:layout_width="255dp"
+        android:layout_height="55dp"
+        android:hint="以食材搜尋 用,分隔食材"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="258dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

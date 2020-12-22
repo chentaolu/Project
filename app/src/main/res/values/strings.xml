@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Test</string>
-    <string name="buttonLogin">按這裡登入</string>
-    <string name="buttonText">我的按鈕</string>
+    <string name="buttonLogin">登入</string>
+    <string name="buttonText">搜尋</string>
+    <string name="title">逢甲小當家</string>
+
     <string name="title_activity_main2">MainActivity2</string>
     <!--
     This string is used for square devices and overridden by hello_world in
