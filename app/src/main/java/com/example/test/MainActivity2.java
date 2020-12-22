@@ -7,9 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
 
 public class MainActivity2 extends AppCompatActivity {
-
     private TextView mTextView;
-    private Client client = MainActivity.getClient();
+    //private Client client = MainActivity.getClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
