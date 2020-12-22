@@ -17,10 +17,17 @@ public class Client {
         this.port = port;
         try {
             client = new Socket(ServerName, port);
+            OutputStream outToServer = client.getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+            out.writeUTF("HELLO FROM " + client.getLocalSocketAddress());
 
         } catch (IOException e) {
+            try {
+                client.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
             e.printStackTrace();
-            finish();
         }
     }
 
@@ -33,7 +40,7 @@ public class Client {
             e.printStackTrace();
         }
     }
-
+    /*
     public String ReadMessage() {
         try {
             DataInputStream in = new DataInputStream(this.client.getInputStream());
@@ -41,7 +48,8 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+        return read;
+    }*/
 
 }
 
