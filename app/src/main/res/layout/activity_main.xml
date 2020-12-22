@@ -17,9 +17,19 @@
         app:layout_constraintTop_toTopOf="parent" />
     -->
     <Button
+        android:id="@+id/loginButton"
+        android:layout_width="152dp"
+        android:layout_height="57dp"
+        android:text="@string/buttonLogin"
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="74dp">
+
+    </Button>
+
+    <Button
         android:id="@+id/button"
-        android:layout_width="151dp"
-        android:layout_height="108dp"
+        android:layout_width="112dp"
+        android:layout_height="48dp"
         android:layout_marginStart="122dp"
         android:layout_marginTop="301dp"
         android:layout_marginEnd="138dp"
@@ -27,7 +37,9 @@
         android:text="@string/buttonText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

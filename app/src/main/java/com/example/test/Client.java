@@ -31,6 +31,11 @@ public class Client {
         }
     }
 
+    /**
+     * send method and param
+     * for example searchRecipes pizza
+     * @param message
+     */
     public void SendMessage(String message) {
         try {
             OutputStream outToServer = client.getOutputStream();
@@ -40,16 +45,18 @@ public class Client {
             e.printStackTrace();
         }
     }
-    /*
+
+
     public String ReadMessage() {
+        String read = "";
         try {
             DataInputStream in = new DataInputStream(this.client.getInputStream());
-            String read = in.readUTF();
+            read = in.readUTF();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return read;
-    }*/
+    }
 
 }
 
