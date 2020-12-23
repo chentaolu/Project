@@ -20,7 +20,6 @@ public class Client {
             OutputStream outToServer = client.getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServer);
             out.writeUTF("HELLO FROM " + client.getLocalSocketAddress());
-
         } catch (IOException e) {
             try {
                 client.close();

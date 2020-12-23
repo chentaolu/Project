@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         button.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, MainActivity2.class)));
         buttonLogin.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, LoginActivity.class)));
-        //
+
     }
 
     public Client getClient() {
