@@ -3,6 +3,7 @@
     <string name="buttonLogin">登入</string>
     <string name="buttonText">搜尋</string>
     <string name="title">逢甲小當家</string>
+    <string name="nutrientTitle">營養成分搜尋</string>
 
     <string name="title_activity_main2">MainActivity2</string>
     <!--

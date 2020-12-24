@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@drawable/background"
+    android:background=""
     tools:context=".MainActivity">
 
     <!---
@@ -20,14 +20,15 @@
     -->
 
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="114dp"
-        android:layout_height="43dp"
-        android:background="@color/black"
-        android:text="@string/buttonLogin"
-        tools:layout_editor_absoluteX="263dp"
-        tools:layout_editor_absoluteY="16dp"></Button>
+
+    <ImageButton
+        android:layout_width="297dp"
+        android:layout_height="249dp"
+        android:src="@drawable/background"
+        android:scaleType="centerInside"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="452dp"
+        />
 
     <Button
         android:id="@+id/searchRecipeButton"

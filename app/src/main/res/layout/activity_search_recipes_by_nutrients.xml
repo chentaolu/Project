@@ -1,25 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_grey"
-    android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".searchRecipesByNutrients"
-    tools:deviceIds="wear">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding"
-        app:boxedEdges="all">
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
+    <!---
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    -->
 
-    </FrameLayout>
-</androidx.wear.widget.BoxInsetLayout>
+    <TextView
+        android:id="@+id/max"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:text="max"
+        android:gravity="center"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="71dp" />
+
+    <TextView
+        android:id="@+id/min"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:text="min"
+        android:gravity="center"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="71dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="182dp"
+        android:layout_height="40dp"
+        android:text="@string/nutrientTitle"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:typeface="monospace"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="19dp" />
+
+    <TextView
+        android:id="@+id/Carbs"
+        android:layout_width="163dp"
+        android:layout_height="42dp"
+        android:text="碳水化合物/g"
+        android:textSize="27sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="103dp" />
+
+    <EditText
+        android:id="@+id/carbsMin"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="113dp"
+        />
+
+    <EditText
+        android:id="@+id/carbsMax"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="113dp" />
+
+    <TextView
+        android:id="@+id/Calories"
+        android:layout_width="163dp"
+        android:layout_height="42dp"
+        android:text="卡路里/cal"
+        android:textSize="27sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="165dp" />
+
+    <EditText
+        android:id="@+id/caloriesMin"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="175dp" />
+
+    <EditText
+        android:id="@+id/caloriesMax"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="175dp" />
+
+    <TextView
+        android:id="@+id/Protein"
+        android:layout_width="163dp"
+        android:layout_height="42dp"
+        android:text="蛋白質/g"
+        android:textSize="27sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="226dp" />
+
+
+    <EditText
+        android:id="@+id/proteinMin"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="236dp" />
+
+    <EditText
+        android:id="@+id/proteinMax"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="236dp" />
+
+    <TextView
+        android:id="@+id/Fat"
+        android:layout_width="163dp"
+        android:layout_height="42dp"
+        android:text="脂肪/g"
+        android:textSize="27sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="292dp" />
+
+    <EditText
+        android:id="@+id/fatMin"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="302dp" />
+
+    <EditText
+        android:id="@+id/fatMax"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="302dp" />
+
+    <TextView
+        android:id="@+id/VitaminC"
+        android:layout_width="163dp"
+        android:layout_height="42dp"
+        android:text="維他命C/mg"
+        android:textSize="27sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="358dp" />
+
+    <EditText
+        android:id="@+id/vitaminCMin"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="368dp" />
+
+    <EditText
+        android:id="@+id/vitaminCMax"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="368dp" />
+
+    <TextView
+        android:id="@+id/Fiber"
+        android:layout_width="163dp"
+        android:layout_height="42dp"
+        android:text="纖維/g"
+        android:textSize="27sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="421dp" />
+
+    <EditText
+        android:id="@+id/fiberMin"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="431dp" />
+
+    <EditText
+        android:id="@+id/fiberCMax"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="431dp" />
+
+    <TextView
+        android:id="@+id/Sugar"
+        android:layout_width="163dp"
+        android:layout_height="42dp"
+        android:text="糖/g"
+        android:textSize="27sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="487dp" />
+
+    <EditText
+        android:id="@+id/sugarMin"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="497dp" />
+
+    <EditText
+        android:id="@+id/sugarMax"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="497dp" />
+
+    <TextView
+        android:id="@+id/Iron"
+        android:layout_width="163dp"
+        android:layout_height="42dp"
+        android:text="鐵/mg"
+        android:textSize="27sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="553dp" />
+
+    <EditText
+        android:id="@+id/ironMin"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="563dp" />
+
+    <EditText
+        android:id="@+id/ironMax"
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="302dp"
+        tools:layout_editor_absoluteY="563dp" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="114dp"
+        android:layout_height="43dp"
+        android:background="@color/black"
+        android:text="@string/buttonLogin"
+        tools:layout_editor_absoluteX="263dp"
+        tools:layout_editor_absoluteY="16dp">
+
+    </Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
