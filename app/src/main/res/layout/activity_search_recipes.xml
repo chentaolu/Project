@@ -6,4 +6,90 @@
     android:layout_height="match_parent"
     tools:context=".searchRecipes">
 
+    <ImageButton
+        android:layout_width="297dp"
+        android:layout_height="249dp"
+        android:scaleType="centerInside"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="452dp"
+        />
+
+    <Button
+        android:id="@+id/searchRecipeButton"
+        android:layout_width="99dp"
+        android:layout_height="47dp"
+        android:backgroundTint="#8E2727"
+        android:text="@string/buttonText"
+        tools:layout_editor_absoluteX="278dp"
+        tools:layout_editor_absoluteY="87dp" />
+
+    <Button
+        android:id="@+id/searchVieoButton"
+        android:layout_width="99dp"
+        android:layout_height="47dp"
+        android:text="@string/buttonText"
+        tools:layout_editor_absoluteX="278dp"
+        tools:layout_editor_absoluteY="176dp" />
+
+    <Button
+        android:id="@+id/searchIngredientsButton"
+        android:layout_width="99dp"
+        android:layout_height="47dp"
+        android:text="@string/buttonText"
+        tools:layout_editor_absoluteX="278dp"
+        tools:layout_editor_absoluteY="258dp" />
+
+    <Button
+        android:id="@+id/searchNutrientsButton"
+        android:layout_width="169dp"
+        android:layout_height="54dp"
+        android:text="營養成分搜尋"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="355dp" />
+
+    <Button
+        android:id="@+id/searchRandomButton"
+        android:layout_width="169dp"
+        android:layout_height="54dp"
+        android:text="隨機食譜"
+        tools:layout_editor_absoluteX="198dp"
+        tools:layout_editor_absoluteY="355dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="182dp"
+        android:layout_height="40dp"
+        android:text="@string/title"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:typeface="monospace"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="19dp" />
+
+    <EditText
+        android:id="@+id/searchFood"
+        android:layout_width="255dp"
+        android:layout_height="55dp"
+        android:hint="搜尋食譜"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="87dp" />
+
+    <EditText
+        android:id="@+id/searchVideo"
+        android:layout_width="255dp"
+        android:layout_height="55dp"
+        android:hint="搜尋影片"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="176dp" />
+
+    <EditText
+        android:id="@+id/searchByIngredients"
+        android:layout_width="255dp"
+        android:layout_height="55dp"
+        android:hint="以食材搜尋 用,分隔食材"
+        android:maxLines="2"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="258dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
