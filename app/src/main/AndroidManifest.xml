@@ -40,8 +40,10 @@
         <activity
             android:name=".searchRecipesByNutrients"
             android:label="@string/title_activity_search_recipes_by_nutrients">
+
         </activity>
         <activity android:name=".searchRecipesByIngredients" />
+
     </application>
 
 </manifest>
