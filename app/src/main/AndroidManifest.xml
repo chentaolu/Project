@@ -15,35 +15,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Test">
-
+        <activity android:name=".recipesResult"></activity>
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
         -->
-
-
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
         -->
-        <activity android:name=".searchRecipes" >
+        <activity android:name=".searchRecipes">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
+            android:label="@string/title_activity_login"></activity>
         <activity android:name=".searchFoodVideo" />
         <activity
             android:name=".searchRecipesByNutrients"
-            android:label="@string/title_activity_search_recipes_by_nutrients">
-
-        </activity>
+            android:label="@string/title_activity_search_recipes_by_nutrients"></activity>
         <activity android:name=".searchRecipesByIngredients" />
-
     </application>
 
 </manifest>

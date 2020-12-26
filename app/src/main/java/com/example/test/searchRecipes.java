@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.test.ui.login.LoginActivity;
+
 public class searchRecipes extends AppCompatActivity implements View.OnClickListener {
 
     @SuppressLint("WrongViewCast")
@@ -16,7 +18,9 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_recipes);
         ((Button) findViewById(R.id.searchNutrientsButton)).setOnClickListener(this);
-        ((Button) findViewById(R.id.searchVideo)).setOnClickListener(this);
+        ((Button) findViewById(R.id.searchVieoButton)).setOnClickListener(this);
+        ((Button) findViewById(R.id.searchIngredientsButton)).setOnClickListener(this);
+        ((Button) findViewById(R.id.loginButton)).setOnClickListener(this);
 
     }
 
@@ -28,10 +32,20 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
                 intent = new Intent(searchRecipes.this, searchRecipesByNutrients.class);
                 startActivity(intent);
                 break;
-            case R.id.searchFood:
+            case R.id.searchVieoButton:
                 intent = new Intent(searchRecipes.this, searchFoodVideo.class);
                 startActivity(intent);
                 break;
+            case R.id.searchIngredientsButton:
+                intent = new Intent(searchRecipes.this, searchRecipesByIngredients.class);
+                startActivity(intent);
+                break;
+            case R.id.loginButton:
+                intent = new Intent(searchRecipes.this, LoginActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.searchFood:
+
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
