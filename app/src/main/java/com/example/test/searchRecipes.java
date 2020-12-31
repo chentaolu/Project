@@ -16,6 +16,13 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     static public Client c;
     private EditText SearchFood;
 
+    /*private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            c = new Client("10.0.2.2", 5678);
+        }
+    };*/
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +33,6 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         ((Button) findViewById(R.id.searchIngredientsButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.loginButton)).setOnClickListener(this);
         SearchFood = (EditText) findViewById(R.id.searchFood);
-        try {
-            c = new Client("10.0.2.2",5678);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -55,7 +57,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
                 break;
             case R.id.searchFood:
-                c.SendMessage("searchFood", SearchFood.getText().toString().trim());
+                //c.SendMessage("searchFood", SearchFood.getText().toString().trim());
                 intent = new Intent(searchRecipes.this, recipesResult.class);
                 startActivity(intent);
                 break;
