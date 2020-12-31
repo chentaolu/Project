@@ -11,17 +11,10 @@ import android.widget.EditText;
 
 import com.example.test.ui.login.LoginActivity;
 
-public class searchRecipes extends AppCompatActivity implements View.OnClickListener {
+public class searchRecipes extends AppCompatActivity implements View.OnClickListener, Runnable {
 
-    static public Client c;
+    public Client c;
     private EditText SearchFood;
-
-    /*private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            c = new Client("10.0.2.2", 5678);
-        }
-    };*/
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -32,7 +25,10 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         ((Button) findViewById(R.id.searchVieoButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchIngredientsButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.loginButton)).setOnClickListener(this);
+        ((Button) findViewById(R.id.searchRecipeButton)).setOnClickListener(this);
         SearchFood = (EditText) findViewById(R.id.searchFood);
+        Thread connection = new Thread();
+        connection.start();
     }
 
     @Override
@@ -56,8 +52,13 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
                 intent = new Intent(searchRecipes.this, LoginActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.searchFood:
-                //c.SendMessage("searchFood", SearchFood.getText().toString().trim());
+            case R.id.searchRecipeButton:
+                try {
+                    c.SendMessage("searchFood", SearchFood.getText().toString().trim());
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+
                 intent = new Intent(searchRecipes.this, recipesResult.class);
                 startActivity(intent);
                 break;
@@ -66,4 +67,13 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    public void run() {
+        try {
+            c = new Client("10.0.2.2", 5678);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }
