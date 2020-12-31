@@ -11,10 +11,16 @@ import android.widget.EditText;
 
 import com.example.test.ui.login.LoginActivity;
 
-public class searchRecipes extends AppCompatActivity implements View.OnClickListener, Runnable {
+public class searchRecipes extends AppCompatActivity implements View.OnClickListener {
 
     public Client c;
     private EditText SearchFood;
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            c = new Client("10.0.2.2", 5678);
+        }
+    };
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -27,8 +33,8 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         ((Button) findViewById(R.id.loginButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchRecipeButton)).setOnClickListener(this);
         SearchFood = (EditText) findViewById(R.id.searchFood);
-        Thread connection = new Thread();
-        connection.start();
+        Thread connect = new Thread(runnable);
+        connect.start();
     }
 
     @Override
@@ -67,13 +73,4 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    @Override
-    public void run() {
-        try {
-            c = new Client("10.0.2.2", 5678);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
 }
