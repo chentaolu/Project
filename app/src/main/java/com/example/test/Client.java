@@ -1,10 +1,15 @@
 package com.example.test;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Client {
     private String ServerName;
@@ -35,26 +40,38 @@ public class Client {
      * for example searchRecipes pizza
      * @param message
      */
-    public void SendMessage(String message) {
+    public void SendMessage(String function,String message) {
+
         try {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put(function, message);
+
+            JSONObject output = new JSONObject(map);
+            String jsonString = "";
+
+            jsonString = output.toString();
+            byte[] jsonByte = jsonString.getBytes();
             OutputStream outToServer = client.getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServer);
-            out.writeUTF(message);
+            out.write(jsonByte);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    public String ReadMessage() {
+    public JSONObject ReadMessage() {
         String read = "";
+        JSONObject input = null;
         try {
             DataInputStream in = new DataInputStream(this.client.getInputStream());
             read = in.readUTF();
-        } catch (IOException e) {
+            input = new JSONObject(read);
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-        return read;
+        return input;
     }
 
 }
