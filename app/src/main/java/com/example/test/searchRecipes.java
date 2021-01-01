@@ -4,13 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.test.ui.login.LoginActivity;
 
 public class searchRecipes extends AppCompatActivity implements View.OnClickListener{
 
@@ -18,6 +20,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     private EditText SearchFood;
     private EditText SearchByIngredients;
     private EditText SearchFoodVideo;
+    private Button LoginButton;
     private Runnable connectToServerThread = new Runnable() {
         @Override
         public void run() {
@@ -44,7 +47,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     };
 
 
-    @SuppressLint("WrongViewCast")
+    @SuppressLint({"WrongViewCast", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +55,20 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         ((Button) findViewById(R.id.searchNutrientsButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchVieoButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchIngredientsButton)).setOnClickListener(this);
-        ((Button) findViewById(R.id.loginButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchRecipeButton)).setOnClickListener(this);
         SearchFood = (EditText) findViewById(R.id.searchFood);
         SearchByIngredients = (EditText) findViewById(R.id.searchByIngredients);
         SearchFoodVideo = (EditText) findViewById(R.id.searchVideo);
         Thread connect = new Thread(connectToServerThread);
         connect.start();
+        LinearLayout relative = (LinearLayout) findViewById(R.id.loginLayout);
+        LoginButton = new Button(this);
+        LoginButton.setId(25);                                                //25 = login id
+        LoginButton.setOnClickListener(this);
+        LoginButton.setText("登入");
+        LoginButton.setTextColor(getResources().getColorStateList(R.color.white));
+        LoginButton.setBackgroundTintList(getResources().getColorStateList(R.color.button_color));
+        relative.addView(LoginButton);
     }
 
     @Override
@@ -91,10 +101,6 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
                 intent = new Intent(searchRecipes.this, searchRecipesByIngredients.class);
                 startActivity(intent);
                 break;
-            case R.id.loginButton:
-                intent = new Intent(searchRecipes.this, LoginActivity.class);
-                startActivity(intent);
-                break;
             case R.id.searchRecipeButton:
                 try {
                     Thread sendSearchRecipe = new Thread(sendRecipeMessageThread);
@@ -104,6 +110,10 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
                     exception.printStackTrace();
                 }
                 intent = new Intent(searchRecipes.this, recipesResult.class);
+                startActivity(intent);
+                break;
+            case 25:
+                intent = new Intent(searchRecipes.this, Login.class);
                 startActivity(intent);
                 break;
             default:
