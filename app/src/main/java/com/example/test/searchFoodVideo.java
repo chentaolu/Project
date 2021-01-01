@@ -8,24 +8,16 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +27,7 @@ public class searchFoodVideo extends AppCompatActivity {
     private WebView yt;
     private JSONObject result;
     private List<ImageView> images;
+    private List<String> imageURLs;
 
     Client c = searchRecipes.c;
     private Runnable ReadJSONThread = new Runnable() {
@@ -49,22 +42,25 @@ public class searchFoodVideo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_food_video);
+
+        Thread getMessage = new Thread(ReadJSONThread);
+        getMessage.start();
+
         //GraphTemperature GT = new GraphTemperature(getApplicationContext());
         LinearLayout test = (LinearLayout) findViewById(R.id.test);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        Button buyButton = new Button(this);
-        buyButton.setText("123");
-        buyButton.setId(70);
-        buyButton.setLayoutParams(params);
-        images = new ArrayList<ImageView>();
-        images.add(new ImageView(this));
-        images.get(0).setId(90);
-        images.get(0).setLayoutParams(params);
-        new DownloadImageTask(images.get(0))
-                .execute("https://i.ytimg.com/vi/iteIg6OXiac/mqdefault.jpg");
 
-        test.addView(images.get(0));
-        test.addView(buyButton);
+        imageURLs = getAllPicURL(result);
+        images = new ArrayList<ImageView>();
+
+        for (int i = 0; i < imageURLs.size(); i++) {
+            images.add(new ImageView(this));
+            images.get(i).setId(90);
+            images.get(i).setLayoutParams(params);
+            new DownloadImageTask(images.get(i))
+                    .execute(imageURLs.get(i));
+            test.addView(images.get(i));
+        }
 
         /*
         ImageView imageview= new ImageView(getApplicationContext());
