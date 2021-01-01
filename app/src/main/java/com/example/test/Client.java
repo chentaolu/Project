@@ -196,7 +196,7 @@ public class Client {
 
         login.put(function, account);
         try {
-            JSONObject output = new JSONObject(map);
+            JSONObject output = new JSONObject(login);
             String jsonString = "";
             jsonString = output.toString();
             OutputStream outToServer = c.getSocket().getOutputStream();
