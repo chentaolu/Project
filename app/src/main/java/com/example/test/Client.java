@@ -26,11 +26,11 @@ public class Client {
             DataOutputStream out = new DataOutputStream(outToServer);
             out.writeUTF("HELLO FROM " + client.getLocalSocketAddress());
         } catch (IOException e) {
-           /*try {
+           try {
                 client.close();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
-            }*/
+            }
             e.printStackTrace();
         }
     }
@@ -178,6 +178,26 @@ public class Client {
             JSONObject output = new JSONObject(map);
             String jsonString = "";
 
+            jsonString = output.toString();
+            OutputStream outToServer = c.getSocket().getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+            out.writeUTF(jsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendLoginInformation (Client c, String function, String Account, String password) {
+        Map<String, Object> login = new HashMap<String, Object>();
+        Map<String, String> account = new HashMap<String, String>();
+
+        account.put("Account", Account);
+        account.put("password", password);
+
+        login.put(function, account);
+        try {
+            JSONObject output = new JSONObject(login);
+            String jsonString = "";
             jsonString = output.toString();
             OutputStream outToServer = c.getSocket().getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServer);
