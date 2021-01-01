@@ -8,19 +8,41 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.test.ui.login.LoginActivity;
 
-public class searchRecipes extends AppCompatActivity implements View.OnClickListener {
+public class searchRecipes extends AppCompatActivity implements View.OnClickListener{
 
-    public Client c;
+    public static Client c;
     private EditText SearchFood;
-    private Runnable runnable = new Runnable() {
+    private EditText SearchByIngredients;
+    private EditText SearchFoodVideo;
+    private Runnable connectToServerThread = new Runnable() {
         @Override
         public void run() {
             c = new Client("10.0.2.2", 5678);
         }
     };
+    private Runnable sendRecipeMessageThread = new Runnable() {
+        @Override
+        public void run() {
+            c.SendMessage(c,"searchRecipe", SearchFood.getText().toString().trim());
+        }
+    };
+    private Runnable searchIngredientsThread = new Runnable() {
+        @Override
+        public void run() {
+            c.SendMessage(c, "searchByIngredients", SearchByIngredients.getText().toString().trim());
+        }
+    };
+    private Runnable searchVideoThread = new Runnable() {
+        @Override
+        public void run() {
+            c.SendMessage(c, "searchVideo", SearchFoodVideo.getText().toString().trim());
+        }
+    };
+
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -33,7 +55,9 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         ((Button) findViewById(R.id.loginButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchRecipeButton)).setOnClickListener(this);
         SearchFood = (EditText) findViewById(R.id.searchFood);
-        Thread connect = new Thread(runnable);
+        SearchByIngredients = (EditText) findViewById(R.id.searchByIngredients);
+        SearchFoodVideo = (EditText) findViewById(R.id.searchVideo);
+        Thread connect = new Thread(connectToServerThread);
         connect.start();
     }
 
@@ -43,14 +67,27 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         switch(v.getId()) {
             case R.id.searchNutrientsButton:
                 intent = new Intent(searchRecipes.this, searchRecipesByNutrients.class);
-                c.SendMessage("searchNutrient", "");
                 startActivity(intent);
                 break;
             case R.id.searchVieoButton:
+                try {
+                    Thread sendSearchVideo = new Thread (searchVideoThread);
+                    sendSearchVideo.start();
+                    SearchFoodVideo.setText(null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 intent = new Intent(searchRecipes.this, searchFoodVideo.class);
                 startActivity(intent);
                 break;
             case R.id.searchIngredientsButton:
+                try {
+                    Thread sendSearchIngredients = new Thread (searchIngredientsThread);
+                    sendSearchIngredients.start();
+                    SearchByIngredients.setText(null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 intent = new Intent(searchRecipes.this, searchRecipesByIngredients.class);
                 startActivity(intent);
                 break;
@@ -60,11 +97,12 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.searchRecipeButton:
                 try {
-                    c.SendMessage("searchFood", SearchFood.getText().toString().trim());
+                    Thread sendSearchRecipe = new Thread(sendRecipeMessageThread);
+                    sendSearchRecipe.start();
+                    SearchFood.setText(null);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
-
                 intent = new Intent(searchRecipes.this, recipesResult.class);
                 startActivity(intent);
                 break;
@@ -72,5 +110,4 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
     }
-
 }

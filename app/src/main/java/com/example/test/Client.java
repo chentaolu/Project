@@ -35,12 +35,16 @@ public class Client {
         }
     }
 
+    public Socket getSocket() {
+        return this.client;
+    }
+
     /**
      * send method and param
      * for example searchRecipes pizza
      * @param message
      */
-    public void SendMessage(String function,String message) {
+    public void SendMessage(Client c, String function, String message) {
 
         try {
             Map<String, String> map = new HashMap<String, String>();
@@ -50,11 +54,9 @@ public class Client {
             String jsonString = "";
 
             jsonString = output.toString();
-            byte[] jsonByte = jsonString.getBytes();
-            OutputStream outToServer = client.getOutputStream();
+            OutputStream outToServer = c.getSocket().getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServer);
-            out.write(jsonByte);
-
+            out.writeUTF(jsonString);
         } catch (IOException e) {
             e.printStackTrace();
         }
