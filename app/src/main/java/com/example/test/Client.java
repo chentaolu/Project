@@ -1,10 +1,15 @@
 package com.example.test;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Client {
     private String ServerName;
@@ -30,31 +35,45 @@ public class Client {
         }
     }
 
+    public Socket getSocket() {
+        return this.client;
+    }
+
     /**
      * send method and param
      * for example searchRecipes pizza
      * @param message
      */
-    public void SendMessage(String message) {
+    public void SendMessage(Client c, String function, String message) {
+
         try {
-            OutputStream outToServer = client.getOutputStream();
+            Map<String, String> map = new HashMap<String, String>();
+            map.put(function, message);
+
+            JSONObject output = new JSONObject(map);
+            String jsonString = "";
+
+            jsonString = output.toString();
+            OutputStream outToServer = c.getSocket().getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServer);
-            out.writeUTF(message);
+            out.writeUTF(jsonString);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    public String ReadMessage() {
+    public JSONObject ReadMessage() {
         String read = "";
+        JSONObject input = null;
         try {
             DataInputStream in = new DataInputStream(this.client.getInputStream());
             read = in.readUTF();
-        } catch (IOException e) {
+            input = new JSONObject(read);
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-        return read;
+        return input;
     }
 
 }
