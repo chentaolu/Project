@@ -26,11 +26,11 @@ public class Client {
             DataOutputStream out = new DataOutputStream(outToServer);
             out.writeUTF("HELLO FROM " + client.getLocalSocketAddress());
         } catch (IOException e) {
-            try {
+           /*try {
                 client.close();
             } catch (IOException ioException) {
                 ioException.printStackTrace();
-            }
+            }*/
             e.printStackTrace();
         }
     }

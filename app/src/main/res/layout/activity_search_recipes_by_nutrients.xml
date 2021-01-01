@@ -1,322 +1,331 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
 
-    tools:context=".searchRecipesByNutrients">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-    <TextView
-        android:id="@+id/max"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="48dp"
-        android:gravity="center"
-        android:text="max"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:context=".searchRecipesByNutrients">
 
-    <TextView
-        android:id="@+id/min"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="152dp"
-        android:gravity="center"
-        android:text="min"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/max"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="48dp"
+            android:gravity="center"
+            android:text="max"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="182dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/nutrientTitle"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:typeface="monospace"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/min"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="152dp"
+            android:gravity="center"
+            android:text="min"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Carbs"
-        android:layout_width="163dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp"
-        android:text="碳水化合物/g"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="182dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/nutrientTitle"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:typeface="monospace"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/carbsMin"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="152dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/Carbs"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="100dp"
+            android:text="碳水化合物/g"
+            android:textSize="27sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/carbsMax"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="48dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/carbsMin"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="152dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Calories"
-        android:layout_width="163dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="164dp"
-        android:text="卡路里/cal"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/carbsMax"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="48dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/caloriesMin"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="152dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/Calories"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="164dp"
+            android:text="卡路里/cal"
+            android:textSize="27sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <EditText
-        android:id="@+id/caloriesMax"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="172dp"
-        android:layout_marginEnd="48dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/caloriesMin"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="164dp"
+            android:layout_marginEnd="152dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Protein"
-        android:layout_width="163dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="224dp"
-        android:text="蛋白質/g"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/caloriesMax"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="164dp"
+            android:layout_marginEnd="48dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/proteinMin"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="232dp"
-        android:layout_marginEnd="152dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/Protein"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="224dp"
+            android:text="蛋白質/g"
+            android:textSize="27sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/proteinMax"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="232dp"
-        android:layout_marginEnd="48dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/proteinMin"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="224dp"
+            android:layout_marginEnd="152dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Fat"
-        android:layout_width="163dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="292dp"
-        android:text="脂肪/g"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/proteinMax"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="224dp"
+            android:layout_marginEnd="48dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/fatMin"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginEnd="152dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/Fat"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="292dp"
+            android:text="脂肪/g"
+            android:textSize="27sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/fatMax"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginEnd="48dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/fatMin"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="292dp"
+            android:layout_marginEnd="152dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/VitaminC"
-        android:layout_width="163dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="356dp"
-        android:text="維他命C/mg"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/fatMax"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="292dp"
+            android:layout_marginEnd="48dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/vitaminCMin"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="364dp"
-        android:layout_marginEnd="152dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/VitaminC"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="356dp"
+            android:text="維他命C/mg"
+            android:textSize="27sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/vitaminCMax"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="364dp"
-        android:layout_marginEnd="48dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/vitaminCMin"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="356dp"
+            android:layout_marginEnd="152dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Fiber"
-        android:layout_width="163dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="420dp"
-        android:text="纖維/g"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/vitaminCMax"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="356dp"
+            android:layout_marginEnd="48dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/fiberMin"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="428dp"
-        android:layout_marginEnd="152dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/Fiber"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="420dp"
+            android:text="纖維/g"
+            android:textSize="27sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/fiberMax"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="428dp"
-        android:layout_marginEnd="48dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/fiberMin"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="420dp"
+            android:layout_marginEnd="152dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Sugar"
-        android:layout_width="163dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="484dp"
-        android:text="糖/g"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/fiberMax"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="420dp"
+            android:layout_marginEnd="48dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/sugarMin"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="492dp"
-        android:layout_marginEnd="152dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/Sugar"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="484dp"
+            android:text="糖/g"
+            android:textSize="27sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/sugarMax"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="492dp"
-        android:layout_marginEnd="48dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/sugarMin"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="484dp"
+            android:layout_marginEnd="152dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Iron"
-        android:layout_width="163dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="552dp"
-        android:text="鐵/mg"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/sugarMax"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="484dp"
+            android:layout_marginEnd="48dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/ironMin"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="560dp"
-        android:layout_marginEnd="152dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/Iron"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="552dp"
+            android:text="鐵/mg"
+            android:textSize="27sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/ironMax"
-        android:layout_width="60dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="560dp"
-        android:layout_marginEnd="48dp"
-        android:maxLines="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/ironMin"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="552dp"
+            android:layout_marginEnd="152dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="114dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/black"
-        android:text="@string/buttonLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <EditText
+            android:id="@+id/ironMax"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="552dp"
+            android:layout_marginEnd="48dp"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-
-    </Button>
-
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="99dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="624dp"
-        android:layout_marginEnd="156dp"
-        android:text="@string/buttonText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="114dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/black"
+            android:text="@string/buttonLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </Button>
+
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="624dp"
+            android:layout_marginEnd="156dp"
+            android:text="@string/buttonText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
