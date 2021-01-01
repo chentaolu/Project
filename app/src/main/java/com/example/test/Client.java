@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Client {
+    public static boolean readDone = false;
     private String ServerName;
     private int port;
     Socket client;
@@ -73,6 +74,7 @@ public class Client {
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
+        readDone = true;
         return input;
     }
 

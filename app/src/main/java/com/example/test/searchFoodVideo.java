@@ -12,6 +12,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +29,8 @@ public class searchFoodVideo extends AppCompatActivity {
     private JSONObject result;
     private List<ImageView> images;
     private List<String> imageURLs;
+    private List<TextView> titles;
+    private List<String> shortTitles;
 
     Client c = searchRecipes.c;
     private Runnable ReadJSONThread = new Runnable() {
@@ -46,16 +49,24 @@ public class searchFoodVideo extends AppCompatActivity {
         Thread getMessage = new Thread(ReadJSONThread);
         getMessage.start();
 
-        //GraphTemperature GT = new GraphTemperature(getApplicationContext());
+
+        while (!c.readDone);
+        c.readDone = false;
+
         LinearLayout test = (LinearLayout) findViewById(R.id.test);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         imageURLs = getAllPicURL(result);
+        shortTitles = getTitle(result);
         images = new ArrayList<ImageView>();
+        titles = new ArrayList<TextView>();
 
         for (int i = 0; i < imageURLs.size(); i++) {
+            titles.add(new TextView(this));
             images.add(new ImageView(this));
-            images.get(i).setId(90);
+            titles.get(i).setId(100 + i);
+            images.get(i).setId(90 + i);
+            titles.get(i).setLayoutParams(params);
             images.get(i).setLayoutParams(params);
             new DownloadImageTask(images.get(i))
                     .execute(imageURLs.get(i));

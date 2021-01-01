@@ -43,7 +43,7 @@ public class recipesResult extends AppCompatActivity {
             TextView text = new TextView(this);
             ImageView img = new ImageView(this);
             text.setText("123");
-           img.setImageURI("");
+            //img.setImageURI("");
             text.setTextSize(50);
             relative.addView(text, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
