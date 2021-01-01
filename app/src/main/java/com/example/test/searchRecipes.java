@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +20,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     private EditText SearchByIngredients;
     private EditText SearchFoodVideo;
     private Button LoginButton;
+    public static Boolean Login = false;
     private Runnable connectToServerThread = new Runnable() {
         @Override
         public void run() {
@@ -62,13 +62,18 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         Thread connect = new Thread(connectToServerThread);
         connect.start();
         LinearLayout relative = (LinearLayout) findViewById(R.id.loginLayout);
-        LoginButton = new Button(this);
-        LoginButton.setId(25);                                                //25 = login id
-        LoginButton.setOnClickListener(this);
-        LoginButton.setText("登入");
-        LoginButton.setTextColor(getResources().getColorStateList(R.color.white));
-        LoginButton.setBackgroundTintList(getResources().getColorStateList(R.color.button_color));
-        relative.addView(LoginButton);
+        if (!Login) {
+            LoginButton = new Button(this);
+            LoginButton.setId(25);                                                //25 = login id
+            LoginButton.setOnClickListener(this);
+            LoginButton.setText("登入");
+            LoginButton.setTextColor(getResources().getColorStateList(R.color.white));
+            LoginButton.setBackgroundTintList(getResources().getColorStateList(R.color.button_color));
+            relative.addView(LoginButton);
+        } else {
+
+        }
+
     }
 
     @Override
