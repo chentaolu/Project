@@ -29,6 +29,20 @@ public class searchRecipesByNutrients extends AppCompatActivity implements View.
     private EditText ironMin;
     private EditText ironMax;
     Client c = searchRecipes.c;
+    private Runnable sendSearchRecipesByNutrientsThread = new Runnable() {
+        @Override
+        public void run() {
+            c.SendSearchRecipesByNutrients(c, "SendSearchRecipesByNutrients", carbsMin.getText().toString().trim(),
+                    carbsMax.getText().toString().trim(), caloriesMin.getText().toString().trim(),
+                    caloriesMax.getText().toString().trim(), proteinMin.getText().toString().trim(),
+                    proteinMax.getText().toString().trim(), fatMin.getText().toString().trim(),
+                    fatMax.getText().toString().trim(), vitaminCMin.getText().toString().trim(),
+                    vitaminCMax.getText().toString().trim(), fiberMin.getText().toString().trim(),
+                    fiberMax.getText().toString().trim(), sugarMin.getText().toString().trim(),
+                    sugarMax.getText().toString().trim(), ironMin.getText().toString().trim(),
+                    ironMax.getText().toString().trim());
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +74,24 @@ public class searchRecipesByNutrients extends AppCompatActivity implements View.
         Intent intent;
         switch (v.getId()) {
             case R.id.searchButton:
-                
+                Thread sendSearchRecipesByNutrients = new Thread(sendSearchRecipesByNutrientsThread);
+                sendSearchRecipesByNutrients.start();
+                carbsMin.setText(null);
+                carbsMax.setText(null);
+                caloriesMin.setText(null);
+                caloriesMax.setText(null);
+                proteinMin.setText(null);
+                proteinMax.setText(null);
+                fatMin.setText(null);
+                fatMax.setText(null);
+                vitaminCMin.setText(null);
+                vitaminCMax.setText(null);
+                fiberMin.setText(null);
+                fiberMax.setText(null);
+                sugarMin.setText(null);
+                sugarMax.setText(null);
+                ironMin.setText(null);
+                ironMin.setText(null);
                 intent = new Intent(searchRecipesByNutrients.this, recipesResult.class);
                 startActivity(intent);
                 break;
