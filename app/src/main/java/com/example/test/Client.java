@@ -1,5 +1,6 @@
 package com.example.test;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,9 +24,7 @@ public class Client {
         this.port = port;
         try {
             client = new Socket(ServerName, port);
-            OutputStream outToServer = client.getOutputStream();
-            DataOutputStream out = new DataOutputStream(outToServer);
-            out.writeUTF("HELLO FROM " + client.getLocalSocketAddress());
+
         } catch (IOException e) {
            try {
                 client.close();
@@ -74,7 +73,19 @@ public class Client {
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-        readDone = true;
+        return input;
+    }
+
+    public JSONArray ReadArray() {
+        String read = "";
+        JSONArray input = null;
+        try {
+            DataInputStream in = new DataInputStream(this.client.getInputStream());
+            read = in.readUTF();
+            input = new JSONArray(read);
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
         return input;
     }
 

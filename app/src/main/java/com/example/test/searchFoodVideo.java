@@ -8,10 +8,12 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -31,12 +33,14 @@ public class searchFoodVideo extends AppCompatActivity {
     private List<String> imageURLs;
     private List<TextView> titles;
     private List<String> shortTitles;
+    private ProgressBar spinner;
 
     Client c = searchRecipes.c;
     private Runnable ReadJSONThread = new Runnable() {
         @Override
         public void run() {
             result = c.ReadMessage();
+            c.readDone = true;
         }
     };
 
@@ -45,15 +49,20 @@ public class searchFoodVideo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_food_video);
-
+        /*
         Thread getMessage = new Thread(ReadJSONThread);
         getMessage.start();
-
+        */
+        spinner = (ProgressBar)findViewById(R.id.progressBar1);
+        spinner.setVisibility(View.VISIBLE);
 
         while (!c.readDone);
         c.readDone = false;
 
-        LinearLayout test = (LinearLayout) findViewById(R.id.test);
+
+        spinner.setVisibility(View.GONE);
+
+        LinearLayout videos = (LinearLayout) findViewById(R.id.videos);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         imageURLs = getAllPicURL(result);
@@ -62,15 +71,24 @@ public class searchFoodVideo extends AppCompatActivity {
         titles = new ArrayList<TextView>();
 
         for (int i = 0; i < imageURLs.size(); i++) {
+
             titles.add(new TextView(this));
             images.add(new ImageView(this));
-            titles.get(i).setId(100 + i);
-            images.get(i).setId(90 + i);
-            titles.get(i).setLayoutParams(params);
-            images.get(i).setLayoutParams(params);
+
             new DownloadImageTask(images.get(i))
                     .execute(imageURLs.get(i));
-            test.addView(images.get(i));
+            titles.get(i).setText(shortTitles.get(i));
+
+            titles.get(i).setId(100 + i);
+            images.get(i).setId(120 + i);
+
+            titles.get(i).setLayoutParams(params);
+            images.get(i).setLayoutParams(params);
+
+
+
+            videos.addView(titles.get(i));
+            videos.addView(images.get(i));
         }
 
         /*
