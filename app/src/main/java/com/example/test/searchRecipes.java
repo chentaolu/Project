@@ -20,11 +20,12 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     private EditText SearchByIngredients;
     private EditText SearchFoodVideo;
     private Button LoginButton;
+    private String id;
     public static Boolean Login = false;
     private Runnable connectToServerThread = new Runnable() {
         @Override
         public void run() {
-            c = new Client("25.38.146.126", 4567);
+            c = new Client("192.168.11.117", 4567);
         }
     };
     private Runnable sendRecipeMessageThread = new Runnable() {
@@ -46,7 +47,6 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         }
     };
 
-
     @SuppressLint({"WrongViewCast", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +64,16 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         LinearLayout relative = (LinearLayout) findViewById(R.id.loginLayout);
         if (!Login) {
             LoginButton = new Button(this);
-            LoginButton.setId(25);                                                //25 = login id
+            LoginButton.setId(25);                      //25 = login id
             LoginButton.setOnClickListener(this);
-            LoginButton.setText("登入");
+            LoginButton.setText(R.string.action_sign_in);
             LoginButton.setTextColor(getResources().getColorStateList(R.color.white));
             LoginButton.setBackgroundTintList(getResources().getColorStateList(R.color.button_color));
             relative.addView(LoginButton);
         } else {
-
+            TextView loginId = new TextView(this);
+            loginId.setId(26);
+            loginId.setText("");
         }
 
     }

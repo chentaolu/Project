@@ -29,17 +29,19 @@ import java.util.List;
 
 public class recipesResult extends AppCompatActivity {
 
+    private JSONArray result;
     private LinearLayout mLayout;
-    private JSONObject result;
-    private List<ImageView> images;
-    private List<String> imageURLs;
-    private List<String> recipeTitle;
-
+    private List<String> ids = new ArrayList<String>();
+    private List<String> titles = new ArrayList<String>();
+    private List<String> imageURLs = new ArrayList<String>();
+    private List<TextView> allTitle = new ArrayList<TextView>();
+    private List<ImageView> images = new ArrayList<ImageView>();
     Client c = searchRecipes.c;
     private Runnable ReadJSONThread = new Runnable() {
         @Override
         public void run() {
-            result = c.ReadMessage();
+            result = c.ReadArray();
+            c.readDone = true;
         }
     };
 
@@ -69,18 +71,36 @@ public class recipesResult extends AppCompatActivity {
             test.addView(images.get(i));
         }
 
-    }
+        setContentView(R.layout.activity_recipes_result); ///不使用 main.xml 資源
 
-    private List<String> getAllPicURL (JSONObject input) {
-        List<String> pictures = new ArrayList<String>();
-        try {
-            JSONArray result = input.getJSONArray("result");
-            for (int i = 0; i < result.length(); i++) {
-                JSONObject jsonObject = result.getJSONObject(i);
-                pictures.add(jsonObject.getString("image"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        Thread getResult = new Thread(ReadJSONThread);
+        getResult.start();
+
+        while(!c.readDone);
+        c.readDone = true;
+
+        getIds(result);
+        getImageURLs(result);
+        getTitles(result);
+
+        LinearLayout layout = new LinearLayout(this);
+
+        this.addContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT));
+        layout.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout relative = (LinearLayout) findViewById(R.id.imgLayout);
+
+        for(int i = 0; i < ids.size(); i++){
+            allTitle.add(new TextView(this));
+            images.add(new ImageView(this));
+
+            allTitle.get(i).setText(titles.get(i));
+            allTitle.get(i).setTextSize(50);
+            relative.addView(allTitle.get(i), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+            new recipesResult.DownloadImageTask(images.get(i))
+                    .execute(imageURLs.get(i));
+
+            relative.addView(images.get(i), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
         return pictures;
     }
@@ -121,6 +141,39 @@ public class recipesResult extends AppCompatActivity {
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
+        }
+    }
+
+    private void getIds (JSONArray result) {
+        for (int i = 0; i < result.length(); i++) {
+            try {
+                JSONObject jsonObject = result.getJSONObject(i);
+                ids.add(jsonObject.getString("id"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void getImageURLs (JSONArray result) {
+        for (int i = 0; i < result.length(); i++) {
+            try {
+                JSONObject jsonObject = result.getJSONObject(i);
+                imageURLs.add(jsonObject.getString("image"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void getTitles (JSONArray result) {
+        for (int i = 0; i < result.length(); i++) {
+            try {
+                JSONObject jsonObject = result.getJSONObject(i);
+                titles.add(jsonObject.getString("title"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
