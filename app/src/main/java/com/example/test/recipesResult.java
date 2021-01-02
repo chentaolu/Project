@@ -49,28 +49,6 @@ public class recipesResult extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_food_video);
-
-        Thread getMessage = new Thread(ReadJSONThread);
-        getMessage.start();
-
-        //GraphTemperature GT = new GraphTemperature(getApplicationContext());
-        LinearLayout test = (LinearLayout) findViewById(R.id.imgLayout);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-        imageURLs = getAllPicURL(result);
-        recipeTitle = getTitle(result);
-        images = new ArrayList<ImageView>();
-
-        for (int i = 0; i < imageURLs.size(); i++) {
-            images.add(new ImageView(this));
-            images.get(i).setId(0);
-            images.get(i).setLayoutParams(params);
-            new DownloadImageTask(images.get(i))
-                    .execute(imageURLs.get(i));
-            test.addView(images.get(i));
-        }
-
         setContentView(R.layout.activity_recipes_result); ///不使用 main.xml 資源
 
         Thread getResult = new Thread(ReadJSONThread);
@@ -102,7 +80,6 @@ public class recipesResult extends AppCompatActivity {
 
             relative.addView(images.get(i), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
-        return pictures;
     }
 
     private List<String> getTitle (JSONObject input) {
