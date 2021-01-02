@@ -48,7 +48,8 @@ public class Client {
 
         try {
             Map<String, String> map = new HashMap<String, String>();
-            map.put(function, message);
+            map.put("function", function);
+            map.put("message", message);
 
             JSONObject output = new JSONObject(map);
             String jsonString = "";
@@ -103,7 +104,7 @@ public class Client {
             index.put("carbsMin", carbsMin);
         }
         if(carbsMax.equals("")) {
-            index.put("carbsMax", "0");
+            index.put("carbsMax", "50");
         } else {
             index.put("carbsMax", carbsMax);
         }
@@ -114,7 +115,7 @@ public class Client {
             index.put("caloriesMin", caloriesMin);
         }
         if(caloriesMax.equals("")) {
-            index.put("caloriesMax", "0");
+            index.put("caloriesMax", "50");
         } else {
             index.put("caloriesMax", caloriesMax);
         }
@@ -125,7 +126,7 @@ public class Client {
             index.put("proteinMin", proteinMin);
         }
         if(proteinMax.equals("")) {
-            index.put("proteinMax", "0");
+            index.put("proteinMax", "50");
         } else {
             index.put("proteinMax", proteinMax);
         }
@@ -136,7 +137,7 @@ public class Client {
             index.put("fatMin", fatMin);
         }
         if(fatMax.equals("")) {
-            index.put("fatMax", "0");
+            index.put("fatMax", "50");
         } else {
             index.put("fatMax", fatMax);
         }
@@ -147,7 +148,7 @@ public class Client {
             index.put("vitaminCMin", vitaminCMin);
         }
         if(vitaminCMax.equals("")) {
-            index.put("vitaminCMax", "0");
+            index.put("vitaminCMax", "50");
         } else {
             index.put("vitaminCMax", vitaminCMax);
         }
@@ -158,7 +159,7 @@ public class Client {
             index.put("fiberMin", fiberMin);
         }
         if(fiberMax.equals("")) {
-            index.put("fiberMax", "0");
+            index.put("fiberMax", "50");
         } else {
             index.put("fiberMax", fiberMax);
         }
@@ -169,7 +170,7 @@ public class Client {
             index.put("sugarMin", sugarMin);
         }
         if(sugarMax.equals("")) {
-            index.put("sugarMax", "0");
+            index.put("sugarMax", "50");
         } else {
             index.put("sugarMax", sugarMax);
         }
@@ -180,12 +181,13 @@ public class Client {
             index.put("ironMin", ironMin);
         }
         if(ironMax.equals("")) {
-            index.put("ironMax", "0");
+            index.put("ironMax", "50");
         } else {
             index.put("ironMax", ironMax);
         }
 
-        map.put(function, index);
+        map.put("function", function);
+        map.put("message", index);
 
         try {
             JSONObject output = new JSONObject(map);

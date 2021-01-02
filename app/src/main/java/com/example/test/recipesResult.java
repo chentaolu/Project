@@ -16,14 +16,34 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class recipesResult extends AppCompatActivity {
 
+    private JSONArray result;
     private LinearLayout mLayout;
+    private List<String> ids = new ArrayList<String>();
+    private List<String> titles = new ArrayList<String>();
+    private List<String> imageURLs = new ArrayList<String>();
+    private List<TextView> allTitle = new ArrayList<TextView>();
+    private List<ImageView> images = new ArrayList<ImageView>();
+    Client c = searchRecipes.c;
+    private Runnable ReadJSONThread = new Runnable() {
+        @Override
+        public void run() {
+            result = c.ReadArray();
+            c.readDone = true;
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,26 +52,34 @@ public class recipesResult extends AppCompatActivity {
 
         setContentView(R.layout.activity_recipes_result); ///不使用 main.xml 資源
 
-        LinearLayout layout = new LinearLayout(this);
+        Thread getResult = new Thread(ReadJSONThread);
+        getResult.start();
 
+        while(!c.readDone);
+        c.readDone = true;
+
+        getIds(result);
+        getImageURLs(result);
+        getTitles(result);
+
+        LinearLayout layout = new LinearLayout(this);
 
         this.addContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT));
         layout.setOrientation(LinearLayout.VERTICAL);
         LinearLayout relative = (LinearLayout) findViewById(R.id.imgLayout);
 
-        for(int i = 0; i<5; i++){
-            TextView text = new TextView(this);
-            ImageView img = new ImageView(this);
-            text.setText("123");
-            //img.setImageURI("");
-            text.setTextSize(50);
-            relative.addView(text, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        for(int i = 0; i < ids.size(); i++){
+            allTitle.add(new TextView(this));
+            images.add(new ImageView(this));
 
+            allTitle.get(i).setText(titles.get(i));
+            allTitle.get(i).setTextSize(50);
+            relative.addView(allTitle.get(i), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
+            new recipesResult.DownloadImageTask(images.get(i))
+                    .execute(imageURLs.get(i));
 
-            EditText txt = new EditText(this);
-            relative.addView(txt, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
+            relative.addView(images.get(i), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         }
 
     }
@@ -78,6 +106,39 @@ public class recipesResult extends AppCompatActivity {
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
+        }
+    }
+
+    private void getIds (JSONArray result) {
+        for (int i = 0; i < result.length(); i++) {
+            try {
+                JSONObject jsonObject = result.getJSONObject(i);
+                ids.add(jsonObject.getString("id"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void getImageURLs (JSONArray result) {
+        for (int i = 0; i < result.length(); i++) {
+            try {
+                JSONObject jsonObject = result.getJSONObject(i);
+                imageURLs.add(jsonObject.getString("image"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void getTitles (JSONArray result) {
+        for (int i = 0; i < result.length(); i++) {
+            try {
+                JSONObject jsonObject = result.getJSONObject(i);
+                titles.add(jsonObject.getString("title"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
