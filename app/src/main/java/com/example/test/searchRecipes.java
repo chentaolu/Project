@@ -24,7 +24,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     private Runnable connectToServerThread = new Runnable() {
         @Override
         public void run() {
-            c = new Client("10.0.2.2", 5678);
+            c = new Client("25.38.146.126", 4567);
         }
     };
     private Runnable sendRecipeMessageThread = new Runnable() {

@@ -16,44 +16,87 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class recipesResult extends AppCompatActivity {
 
     private LinearLayout mLayout;
+    private JSONObject result;
+    private List<ImageView> images;
+    private List<String> imageURLs;
+    private List<String> recipeTitle;
+
+    Client c = searchRecipes.c;
+    private Runnable ReadJSONThread = new Runnable() {
+        @Override
+        public void run() {
+            result = c.ReadMessage();
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search_food_video);
 
-        setContentView(R.layout.activity_recipes_result); ///不使用 main.xml 資源
+        Thread getMessage = new Thread(ReadJSONThread);
+        getMessage.start();
 
-        LinearLayout layout = new LinearLayout(this);
+        //GraphTemperature GT = new GraphTemperature(getApplicationContext());
+        LinearLayout test = (LinearLayout) findViewById(R.id.imgLayout);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
+        imageURLs = getAllPicURL(result);
+        recipeTitle = getTitle(result);
+        images = new ArrayList<ImageView>();
 
-        this.addContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT));
-        layout.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout relative = (LinearLayout) findViewById(R.id.imgLayout);
-
-        for(int i = 0; i<5; i++){
-            TextView text = new TextView(this);
-            ImageView img = new ImageView(this);
-            text.setText("123");
-           img.setImageURI("");
-            text.setTextSize(50);
-            relative.addView(text, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-
-
-            EditText txt = new EditText(this);
-            relative.addView(txt, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-
+        for (int i = 0; i < imageURLs.size(); i++) {
+            images.add(new ImageView(this));
+            images.get(i).setId(0);
+            images.get(i).setLayoutParams(params);
+            new DownloadImageTask(images.get(i))
+                    .execute(imageURLs.get(i));
+            test.addView(images.get(i));
         }
 
+    }
+
+    private List<String> getAllPicURL (JSONObject input) {
+        List<String> pictures = new ArrayList<String>();
+        try {
+            JSONArray result = input.getJSONArray("result");
+            for (int i = 0; i < result.length(); i++) {
+                JSONObject jsonObject = result.getJSONObject(i);
+                pictures.add(jsonObject.getString("image"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return pictures;
+    }
+
+    private List<String> getTitle (JSONObject input) {
+        List<String> Titles = new ArrayList<String>();
+        try {
+            JSONArray result = input.getJSONArray("result");
+            for (int i = 0; i < result.length(); i++) {
+                JSONObject jsonObject = result.getJSONObject(i);
+                Titles.add(jsonObject.getString("title"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return Titles;
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
