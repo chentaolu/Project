@@ -85,8 +85,6 @@ public class searchFoodVideo extends AppCompatActivity {
             titles.get(i).setLayoutParams(params);
             images.get(i).setLayoutParams(params);
 
-
-
             videos.addView(titles.get(i));
             videos.addView(images.get(i));
         }

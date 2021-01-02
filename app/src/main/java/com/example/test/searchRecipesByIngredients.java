@@ -58,6 +58,7 @@ public class searchRecipesByIngredients extends AppCompatActivity {
                     .execute(imagesURLs.get(i));
 
             allTitles.get(i).setId(140 + i);
+            images.get(i).setId(160 + i);
 
             allTitles.get(i).setLayoutParams(params);
             images.get(i).setLayoutParams(params);
