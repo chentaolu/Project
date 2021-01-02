@@ -22,6 +22,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
     };
 
+
+    private Button registerButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +55,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.registerButton:
-                intent = new Intent(Login.this, register.class);
+                intent = new Intent(Login.this, Register.class);
                 startActivity(intent);
                 break;
             default:

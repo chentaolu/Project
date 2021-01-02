@@ -24,7 +24,6 @@ public class Client {
         this.port = port;
         try {
             client = new Socket(ServerName, port);
-
         } catch (IOException e) {
            try {
                 client.close();
