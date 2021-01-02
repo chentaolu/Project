@@ -21,6 +21,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     private EditText SearchFoodVideo;
     private Button LoginButton;
     private String id;
+    private static boolean firstCreate = true;
     public static Boolean Login = false;
     private Runnable connectToServerThread = new Runnable() {
         @Override
@@ -59,8 +60,13 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         SearchFood = (EditText) findViewById(R.id.searchFood);
         SearchByIngredients = (EditText) findViewById(R.id.searchByIngredients);
         SearchFoodVideo = (EditText) findViewById(R.id.searchVideo);
-        Thread connect = new Thread(connectToServerThread);
-        connect.start();
+        if (firstCreate == true) {
+            Thread connect = new Thread(connectToServerThread);
+            connect.start();
+            firstCreate = false;
+        } else {
+            firstCreate = false;
+        }
         LinearLayout relative = (LinearLayout) findViewById(R.id.loginLayout);
         if (!Login) {
             LoginButton = new Button(this);
@@ -116,7 +122,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
-                intent = new Intent(searchRecipes.this, recipesResult.class);
+                intent = new Intent(searchRecipes.this, searchRecipesResult.class);
                 startActivity(intent);
                 break;
             case 25:

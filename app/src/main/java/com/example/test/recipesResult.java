@@ -3,6 +3,7 @@ package com.example.test;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -27,10 +28,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class recipesResult extends AppCompatActivity {
+public class recipesResult extends AppCompatActivity implements View.OnClickListener {
 
     private JSONArray result;
-    private LinearLayout mLayout;
+    private int clickNumber = 0;
     private List<String> ids = new ArrayList<String>();
     private List<String> titles = new ArrayList<String>();
     private List<String> imageURLs = new ArrayList<String>();
@@ -44,6 +45,12 @@ public class recipesResult extends AppCompatActivity {
             c.readDone = true;
         }
     };
+    private Runnable sendId = new Runnable() {
+        @Override
+        public void run() {
+            c.SendMessage(c, "searchById", Integer.toString(clickNumber));
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +62,7 @@ public class recipesResult extends AppCompatActivity {
         getResult.start();
 
         while(!c.readDone);
-        c.readDone = true;
+        c.readDone = false;
 
         getIds(result);
         getImageURLs(result);
@@ -70,7 +77,8 @@ public class recipesResult extends AppCompatActivity {
         for(int i = 0; i < ids.size(); i++){
             allTitle.add(new TextView(this));
             images.add(new ImageView(this));
-
+            images.get(i).setId(300 + i);
+            images.get(i).setOnClickListener(this);
             allTitle.get(i).setText(titles.get(i));
             allTitle.get(i).setTextSize(50);
             relative.addView(allTitle.get(i), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -82,18 +90,27 @@ public class recipesResult extends AppCompatActivity {
         }
     }
 
-    private List<String> getTitle (JSONObject input) {
-        List<String> Titles = new ArrayList<String>();
-        try {
-            JSONArray result = input.getJSONArray("result");
-            for (int i = 0; i < result.length(); i++) {
-                JSONObject jsonObject = result.getJSONObject(i);
-                Titles.add(jsonObject.getString("title"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ids.clear();
+        titles.clear();
+        images.clear();
+        imageURLs.clear();
+        allTitle.clear();
+        c.readDone = false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        clickNumber = v.getId();
+        Intent intent;
+        if (clickNumber >= 300 && clickNumber < 350) {
+            Thread sendIds = new Thread(sendId);
+            sendIds.start();
+            intent = new Intent(recipesResult.this, singleRecipe.class);
+            startActivity(intent);
         }
-        return Titles;
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

@@ -203,12 +203,10 @@ public class Client {
 
     public void sendLoginInformation (Client c, String function, String Account, String password) {
         Map<String, Object> login = new HashMap<String, Object>();
-        Map<String, String> account = new HashMap<String, String>();
+        login.put("function", function);
+        login.put("Account", Account);
+        login.put("password", password);
 
-        account.put("Account", Account);
-        account.put("password", password);
-
-        login.put(function, account);
         try {
             JSONObject output = new JSONObject(login);
             String jsonString = "";

@@ -58,7 +58,6 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
         c.readDone = false;
 
         LinearLayout videos = (LinearLayout) findViewById(R.id.videos);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         imageURLs = getAllPicURL(result);
         shortTitles = getTitle(result);
@@ -75,13 +74,9 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
                     .execute(imageURLs.get(i));
             titles.get(i).setText(shortTitles.get(i));
 
-            titles.get(i).setId(100 + i);
-            images.get(i).setId(120 + i);
+            images.get(i).setId(100 + i);
 
             images.get(i).setOnClickListener(this);
-
-            titles.get(i).setLayoutParams(params);
-            images.get(i).setLayoutParams(params);
 
             videos.addView(titles.get(i));
             videos.addView(images.get(i));
@@ -142,67 +137,12 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()) {
-            case 120:
-                yt = (WebView) findViewById(R.id.yt);
-                yt.getSettings().setJavaScriptEnabled(true);
-                yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-                yt.loadUrl(YouTubeURL + youtubeIds.get(0));
-                break;
-            case 121:
-                yt = (WebView) findViewById(R.id.yt);
-                yt.getSettings().setJavaScriptEnabled(true);
-                yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-                yt.loadUrl(YouTubeURL + youtubeIds.get(1));
-                break;
-            case 122:
-                yt = (WebView) findViewById(R.id.yt);
-                yt.getSettings().setJavaScriptEnabled(true);
-                yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-                yt.loadUrl(YouTubeURL + youtubeIds.get(2));
-                break;
-            case 123:
-                yt = (WebView) findViewById(R.id.yt);
-                yt.getSettings().setJavaScriptEnabled(true);
-                yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-                yt.loadUrl(YouTubeURL + youtubeIds.get(3));
-                break;
-            case 124:
-                yt = (WebView) findViewById(R.id.yt);
-                yt.getSettings().setJavaScriptEnabled(true);
-                yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-                yt.loadUrl(YouTubeURL + youtubeIds.get(4));
-                break;
-            case 125:
-                yt = (WebView) findViewById(R.id.yt);
-                yt.getSettings().setJavaScriptEnabled(true);
-                yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-                yt.loadUrl(YouTubeURL + youtubeIds.get(5));
-                break;
-            case 126:
-                yt = (WebView) findViewById(R.id.yt);
-                yt.getSettings().setJavaScriptEnabled(true);
-                yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-                yt.loadUrl(YouTubeURL + youtubeIds.get(6));
-                break;
-            case 127:
-                yt = (WebView) findViewById(R.id.yt);
-                yt.getSettings().setJavaScriptEnabled(true);
-                yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-                yt.loadUrl(YouTubeURL + youtubeIds.get(7));
-                break;
-            case 128:
-                yt = (WebView) findViewById(R.id.yt);
-                yt.getSettings().setJavaScriptEnabled(true);
-                yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-                yt.loadUrl(YouTubeURL + youtubeIds.get(8));
-                break;
-            case 129:
-                yt = (WebView) findViewById(R.id.yt);
-                yt.getSettings().setJavaScriptEnabled(true);
-                yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-                yt.loadUrl(YouTubeURL + youtubeIds.get(9));
-                break;
+        int clickNum = v.getId();
+        if (clickNum >= 100 && clickNum < 150) {
+            yt = (WebView) findViewById(R.id.yt);
+            yt.getSettings().setJavaScriptEnabled(true);
+            yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            yt.loadUrl(YouTubeURL + youtubeIds.get(clickNum - 150));
         }
     }
 
