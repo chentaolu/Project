@@ -44,8 +44,26 @@ public class Client {
      * for example searchRecipes pizza
      * @param message
      */
-    public void SendMessage(Client c, String function, String message) {
+    public void SendMessage(Client c, String function,String number , String message) {
+        try {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("function", function);
+            map.put("message", message);
+            map.put("number", number);
 
+            JSONObject output = new JSONObject(map);
+            String jsonString = "";
+
+            jsonString = output.toString();
+            OutputStream outToServer = c.getSocket().getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+            out.writeUTF(jsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void SendMessage(Client c, String function, String message) {
         try {
             Map<String, String> map = new HashMap<String, String>();
             map.put("function", function);
@@ -63,6 +81,25 @@ public class Client {
         }
     }
 
+    public void SendMessage(Client c, String function, String id, String account, String password) {
+        try {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("function", function);
+            map.put("id", id);
+            map.put("account", account);
+            map.put("password", password);
+
+            JSONObject output = new JSONObject(map);
+            String jsonString = "";
+
+            jsonString = output.toString();
+            OutputStream outToServer = c.getSocket().getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+            out.writeUTF(jsonString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public JSONObject ReadMessage() {
         String read = "";
@@ -77,20 +114,7 @@ public class Client {
         return input;
     }
 
-    public JSONArray ReadArray() {
-        String read = "";
-        JSONArray input = null;
-        try {
-            DataInputStream in = new DataInputStream(this.client.getInputStream());
-            read = in.readUTF();
-            input = new JSONArray(read);
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
-        return input;
-    }
-
-    public void SendSearchRecipesByNutrients (Client c, String function, String carbsMin, String carbsMax,
+    public void SendSearchRecipesByNutrients (Client c, String function,String number, String carbsMin, String carbsMax,
                                               String caloriesMin, String caloriesMax, String proteinMin, String proteinMax,
                                               String fatMin, String fatMax, String vitaminCMin, String vitaminCMax,
                                               String fiberMin, String fiberMax, String sugarMin, String sugarMax,
@@ -185,7 +209,7 @@ public class Client {
         } else {
             index.put("ironMax", ironMax);
         }
-
+        map.put("number", number);
         map.put("function", function);
         map.put("message", index);
 

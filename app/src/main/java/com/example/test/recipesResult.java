@@ -48,7 +48,7 @@ public class recipesResult extends AppCompatActivity implements View.OnClickList
     private Runnable sendId = new Runnable() {
         @Override
         public void run() {
-            c.SendMessage(c, "searchById", Integer.toString(clickNumber));
+            c.SendMessage(c, "searchById", ids.get(clickNumber - 300));
         }
     };
 

@@ -23,31 +23,35 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     private EditText SearchFoodVideo;
     private Button LoginButton;
     private String id;
+    private Spinner spinner;
     private static boolean firstCreate = true;
     final String[] chooseNumber = {"10", "20", "30", "40", "50"};
     public static Boolean Login = false;
     private Runnable connectToServerThread = new Runnable() {
         @Override
         public void run() {
-            c = new Client("25.60.27.205", 4567);
+            c = new Client("10.0.2.2", 4567);
         }
     };
     private Runnable sendRecipeMessageThread = new Runnable() {
         @Override
         public void run() {
-            c.SendMessage(c,"searchRecipe", SearchFood.getText().toString().trim());
+            c.SendMessage(c,"searchRecipe", spinner.getSelectedItem().toString().trim(),
+                    SearchFood.getText().toString().trim());
         }
     };
     private Runnable searchIngredientsThread = new Runnable() {
         @Override
         public void run() {
-            c.SendMessage(c, "searchByIngredients", SearchByIngredients.getText().toString().trim());
+            c.SendMessage(c, "searchByIngredients", spinner.getSelectedItem().toString().trim(),
+                    SearchByIngredients.getText().toString().trim());
         }
     };
     private Runnable searchVideoThread = new Runnable() {
         @Override
         public void run() {
-            c.SendMessage(c, "searchVideo", SearchFoodVideo.getText().toString().trim());
+            c.SendMessage(c, "searchVideo", spinner.getSelectedItem().toString().trim(),
+                    SearchFoodVideo.getText().toString().trim());
         }
     };
 
@@ -56,7 +60,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_recipes);
-        Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        spinner = (Spinner)findViewById(R.id.spinner);
         ((Button) findViewById(R.id.searchNutrientsButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchVieoButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchIngredientsButton)).setOnClickListener(this);
@@ -88,9 +92,12 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
             LoginButton.setBackgroundTintList(getResources().getColorStateList(R.color.button_color));
             relative.addView(LoginButton);
         } else {
+            relative.removeView(LoginButton);
             TextView loginId = new TextView(this);
             loginId.setId(26);
-            loginId.setText("");
+            loginId.setTextSize(20);
+            loginId.setText(com.example.test.Login.id);
+            relative.addView(loginId);
         }
 
     }

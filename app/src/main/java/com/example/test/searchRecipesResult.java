@@ -2,11 +2,13 @@ package com.example.test;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,10 +21,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class searchRecipesResult extends AppCompatActivity {
+public class searchRecipesResult extends AppCompatActivity implements View.OnClickListener {
 
     private JSONObject result;
     private String baseImageURL;
+    private int clickNumber= 0;
     private List<String> ids = new ArrayList<String>();
     private List<String> titles = new ArrayList<String>();
     private List<String> imageURLs = new ArrayList<String>();
@@ -34,6 +37,12 @@ public class searchRecipesResult extends AppCompatActivity {
         public void run() {
             result = c.ReadMessage();
             c.readDone = true;
+        }
+    };
+    private Runnable sendSingleThread = new Runnable() {
+        @Override
+        public void run() {
+            c.SendMessage(c, "searchById", ids.get(clickNumber - 200));
         }
     };
 
@@ -58,10 +67,12 @@ public class searchRecipesResult extends AppCompatActivity {
             allTitles.add(new TextView(this));
             images.add(new ImageView(this));
 
+            allTitles.get(i).setTextSize(15);
             images.get(i).setId(200 + i);
+            images.get(i).setOnClickListener(this);
 
             new searchRecipesResult.DownloadImageTask(images.get(i))
-                    .execute(imageURLs.get(i));
+                    .execute(baseImageURL + imageURLs.get(i));
             allTitles.get(i).setText(titles.get(i));
 
             searchResult.addView(allTitles.get(i));
@@ -77,13 +88,15 @@ public class searchRecipesResult extends AppCompatActivity {
         images.clear();
         imageURLs.clear();
         allTitles.clear();
+        clickNumber = 0;
+        baseImageURL = "";
         c.readDone = false;
     }
 
     private String getBaseImageURL(JSONObject object) {
         String baseURL = "";
         try {
-            baseURL = object.getString("baseUri");
+            baseURL = object.getString("baseUrl");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -139,6 +152,18 @@ public class searchRecipesResult extends AppCompatActivity {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        clickNumber = v.getId();
+        if (clickNumber >=200 || clickNumber < 250) {
+            Thread sendIds = new Thread(sendSingleThread);
+            sendIds.start();
+            intent = new Intent(searchRecipesResult.this, singleRecipe.class);
+            startActivity(intent);
         }
     }
 

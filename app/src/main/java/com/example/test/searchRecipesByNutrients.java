@@ -30,13 +30,15 @@ public class searchRecipesByNutrients extends AppCompatActivity implements View.
     private EditText sugarMax;
     private EditText ironMin;
     private EditText ironMax;
+    private Spinner spinner;
     Client c = searchRecipes.c;
     final String[] chooseNumber = {"10", "20", "30", "40", "50"};
 
     private Runnable sendSearchRecipesByNutrientsThread = new Runnable() {
         @Override
         public void run() {
-            c.SendSearchRecipesByNutrients(c, "SendSearchRecipesByNutrients", carbsMin.getText().toString().trim(),
+            c.SendSearchRecipesByNutrients(c, "SendSearchRecipesByNutrients",
+                    spinner.getSelectedItem().toString().trim(), carbsMin.getText().toString().trim(),
                     carbsMax.getText().toString().trim(), caloriesMin.getText().toString().trim(),
                     caloriesMax.getText().toString().trim(), proteinMin.getText().toString().trim(),
                     proteinMax.getText().toString().trim(), fatMin.getText().toString().trim(),
@@ -52,7 +54,7 @@ public class searchRecipesByNutrients extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_recipes_by_nutrients);
-        Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        spinner = (Spinner)findViewById(R.id.spinner);
         mTextView = (TextView) findViewById(R.id.text);
         carbsMin = (EditText) findViewById(R.id.carbsMin);
         carbsMax = (EditText) findViewById(R.id.carbsMax);

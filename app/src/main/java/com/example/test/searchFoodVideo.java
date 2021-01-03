@@ -103,7 +103,7 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
             for (int i = 0; i < results.length(); i++) {
                 try {
                     JSONObject jsonObject = results.getJSONObject(i);
-                    imageURLs.add(jsonObject.getString("image"));
+                    imageURLs.add(jsonObject.getString("thumbnail"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -120,7 +120,7 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
             for (int i = 0; i < results.length(); i++) {
                 try {
                     JSONObject jsonObject = results.getJSONObject(i);
-                    youtubeIds.add(jsonObject.getString("youtubeId"));
+                    youtubeIds.add(jsonObject.getString("youTubeId"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -151,10 +151,14 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         int clickNum = v.getId();
         if (clickNum >= 100 && clickNum < 150) {
-            yt = (WebView) findViewById(R.id.yt);
-            yt.getSettings().setJavaScriptEnabled(true);
-            yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-            yt.loadUrl(YouTubeURL + youtubeIds.get(clickNum - 150));
+            try {
+                yt = (WebView) findViewById(R.id.yt);
+                yt.getSettings().setJavaScriptEnabled(true);
+                yt.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+                yt.loadUrl(YouTubeURL + youtubeIds.get(clickNum - 100));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
