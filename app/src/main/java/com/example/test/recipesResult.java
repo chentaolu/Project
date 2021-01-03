@@ -78,6 +78,7 @@ public class recipesResult extends AppCompatActivity implements View.OnClickList
             images.add(new ImageView(this));
             images.get(i).setId(300 + i);
             images.get(i).setOnClickListener(this);
+            allTitle.get(i).setTextSize(20);
             allTitle.get(i).setText(titles.get(i));
             relative.addView(allTitle.get(i));
 

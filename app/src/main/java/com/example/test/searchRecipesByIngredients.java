@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
@@ -20,17 +21,17 @@ import java.util.List;
 
 public class searchRecipesByIngredients extends AppCompatActivity {
 
-    private JSONArray result;
-    private List<String> imagesURLs = new ArrayList<String>();
+    private JSONObject result;
+    private List<String> imageURLs = new ArrayList<String>();
     private List<String> titles = new ArrayList<String>();
     public List<String> ids = new ArrayList<String>();
-    private List<TextView> allTitles;
-    private List<ImageView> images;
+    private List<TextView> allTitles = new ArrayList<TextView>();
+    private List<ImageView> images = new ArrayList<ImageView>();
     Client c = searchRecipes.c;
     private Runnable ReadJSONThread = new Runnable() {
         @Override
         public void run() {
-            result = c.ReadArray();
+            result = c.ReadMessage();
             c.readDone = true;
         }
     };
@@ -45,7 +46,7 @@ public class searchRecipesByIngredients extends AppCompatActivity {
 
         getTitles(result);
         getIds(result);
-        getPictureURLs(result);
+        getImageURLs(result);
 
         LinearLayout ingredientsResult = (LinearLayout) findViewById(R.id.ingredientsResult);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -55,7 +56,7 @@ public class searchRecipesByIngredients extends AppCompatActivity {
             images.add(new ImageView(this));
             allTitles.get(i).setText(titles.get(i));
             new searchRecipesByIngredients.DownloadImageTask(images.get(i))
-                    .execute(imagesURLs.get(i));
+                    .execute(imageURLs.get(i));
 
             allTitles.get(i).setId(140 + i);
             images.get(i).setId(160 + i);
@@ -65,41 +66,58 @@ public class searchRecipesByIngredients extends AppCompatActivity {
 
             ingredientsResult.addView(allTitles.get(i));
             ingredientsResult.addView(images.get(i));
-
-        }
-
-    }
-
-    private void getPictureURLs(JSONArray result) {
-        for (int i = 0; i < result.length(); i++) {
-            try {
-                JSONObject object = result.getJSONObject(i);
-                imagesURLs.add(object.getString("image"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
     }
 
-    private void getTitles(JSONArray result) {
-        for (int i = 0; i < result.length(); i++) {
-            try {
-                JSONObject object = result.getJSONObject(i);
-                titles.add(object.getString("title"));
-            } catch (Exception e) {
-                e.printStackTrace();
+    private void getImageURLs (JSONObject result) {
+        JSONArray results = null;
+        try {
+            results = result.getJSONArray("Result");
+
+            for (int i = 0; i < results.length(); i++) {
+                try {
+                    JSONObject jsonObject = results.getJSONObject(i);
+                    imageURLs.add(jsonObject.getString("image"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
-    private  void getIds(JSONArray result) {
-        for (int i = 0; i < result.length(); i++) {
-            try {
-                JSONObject object = result.getJSONObject(i);
-                titles.add(object.getString("id"));
-            } catch (Exception e) {
-                e.printStackTrace();
+    private void getTitles (JSONObject result) {
+        JSONArray results = null;
+        try {
+            results = result.getJSONArray("Result");
+            for (int i = 0; i < results.length(); i++) {
+                try {
+                    JSONObject jsonObject = results.getJSONObject(i);
+                    titles.add(jsonObject.getString("title"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getIds (JSONObject result) {
+        JSONArray results = null;
+        try {
+            results = result.getJSONArray("Result");
+            for (int i = 0; i < results.length(); i++) {
+                try {
+                    JSONObject jsonObject = results.getJSONObject(i);
+                    ids.add(jsonObject.getString("id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
