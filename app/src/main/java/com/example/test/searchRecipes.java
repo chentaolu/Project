@@ -55,6 +55,12 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
                     SearchFoodVideo.getText().toString().trim());
         }
     };
+    private Runnable searchRandomThread = new Runnable() {
+        @Override
+        public void run() {
+            c.SendMessage(c, "searcRandomRecipes", spinner.getSelectedItem().toString().trim());
+        }
+    };
 
     @SuppressLint({"WrongViewCast", "ResourceType"})
     @Override
@@ -150,9 +156,17 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
                 break;
             case R.id.searchRandomButton:
-                intent = new Intent(searchRecipes.this, singleRecipe.class);
+                try {
+                    Thread sendRandomRecipe = new Thread(searchRandomThread);
+                    sendRandomRecipe.start();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+                intent = new Intent(searchRecipes.this, searchRandomRecipe.class);
                 startActivity(intent);
                 break;
+
+
             default:
                 throw new IllegalStateException("Unexpected value: " + v.getId());
         }
