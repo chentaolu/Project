@@ -164,9 +164,6 @@ public class searchRandomRecipe extends AppCompatActivity implements View.OnClic
         }
     }
 
-
-
-
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
 

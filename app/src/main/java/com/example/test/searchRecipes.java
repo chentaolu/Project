@@ -58,7 +58,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     private Runnable searchRandomThread = new Runnable() {
         @Override
         public void run() {
-            c.SendMessage(c, "searcRandomRecipes", spinner.getSelectedItem().toString().trim());
+            c.SendMessage(c, "searchRandomRecipes", spinner.getSelectedItem().toString().trim());
         }
     };
 
