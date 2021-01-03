@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -83,21 +84,22 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
             firstCreate = false;
         }
         LinearLayout relative = (LinearLayout) findViewById(R.id.loginLayout);
+        LoginButton = new Button(this);
+        LoginButton.setId(25);                      //25 = login id
+        LoginButton.setOnClickListener(this);
+        LoginButton.setText(R.string.action_sign_in);
+        LoginButton.setTextColor(getResources().getColorStateList(R.color.white));
+        LoginButton.setBackgroundTintList(getResources().getColorStateList(R.color.button_color));
+        relative.addView(LoginButton);
+        TextView loginId = new TextView(this);
+        loginId.setId(26);
+        loginId.setTextSize(20);
+        loginId.setText(com.example.test.Login.id);
+        relative.addView(loginId);
         if (!Login) {
-            LoginButton = new Button(this);
-            LoginButton.setId(25);                      //25 = login id
-            LoginButton.setOnClickListener(this);
-            LoginButton.setText(R.string.action_sign_in);
-            LoginButton.setTextColor(getResources().getColorStateList(R.color.white));
-            LoginButton.setBackgroundTintList(getResources().getColorStateList(R.color.button_color));
-            relative.addView(LoginButton);
+            relative.removeView(loginId);
         } else {
             relative.removeView(LoginButton);
-            TextView loginId = new TextView(this);
-            loginId.setId(26);
-            loginId.setTextSize(20);
-            loginId.setText(com.example.test.Login.id);
-            relative.addView(loginId);
         }
 
     }

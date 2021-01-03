@@ -21,8 +21,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class searchRecipesResult extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String ACTIVITY_TAG="LogDemo";
     private JSONObject result;
     private String baseImageURL;
     private int clickNumber= 0;
@@ -54,7 +57,14 @@ public class searchRecipesResult extends AppCompatActivity implements View.OnCli
         Thread getMessage = new Thread(ReadJSONThread);
         getMessage.start();
 
-        while (!c.readDone);
+        while (!c.readDone) {
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //Log.v(searchRecipesResult.ACTIVITY_TAG, "wait");
+        };
         c.readDone = false;
 
         baseImageURL = getBaseImageURL(result);

@@ -26,6 +26,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class searchFoodVideo extends AppCompatActivity implements View.OnClickListener {
 
     private String YouTubeURL = "https://www.youtube.com/watch?v=";
@@ -55,7 +57,13 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
         Thread getMessage = new Thread(ReadJSONThread);
         getMessage.start();
 
-        while (!c.readDone);
+        while (!c.readDone) {
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
         c.readDone = false;
 
         LinearLayout videos = (LinearLayout) findViewById(R.id.videos);
