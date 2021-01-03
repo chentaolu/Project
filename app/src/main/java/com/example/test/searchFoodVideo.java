@@ -58,6 +58,7 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
         c.readDone = false;
 
         LinearLayout videos = (LinearLayout) findViewById(R.id.videos);
+        LinearLayout.LayoutParams txt = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         imageURLs = getAllPicURL(result);
@@ -77,14 +78,19 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
 
             titles.get(i).setId(100 + i);
             images.get(i).setId(120 + i);
-
             images.get(i).setOnClickListener(this);
 
-            titles.get(i).setLayoutParams(params);
+            txt.setMargins(50, 50, 0, 0);
+            params.setMargins(100,0,0,50);
+            titles.get(i).setLayoutParams(txt);
+            titles.get(i).setTextSize(30);
+            titles.get(i).setTextColor(R.color.black);
             images.get(i).setLayoutParams(params);
 
             videos.addView(titles.get(i));
             videos.addView(images.get(i));
+
+
         }
     }
 

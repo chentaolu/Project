@@ -20,12 +20,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/chooseHint"
+        android:layout_width="77dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="316dp"
+        android:gravity="center_vertical"
+        android:text="搜尋比數"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="100dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="316dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/searchNutrientsButton"
         android:layout_width="169dp"
         android:layout_height="54dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="352dp"
+        android:layout_marginTop="404dp"
         android:text="營養成分搜尋"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +56,7 @@
         android:id="@+id/searchRandomButton"
         android:layout_width="169dp"
         android:layout_height="54dp"
-        android:layout_marginTop="352dp"
+        android:layout_marginTop="404dp"
         android:layout_marginEnd="16dp"
         android:text="隨機食譜"
         app:layout_constraintEnd_toEndOf="parent"
