@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Test">
-        <activity android:name=".singleRecipe"></activity>
+        <activity android:name=".searchRandomRecipe"></activity>
+        <activity android:name=".singleRecipe" />
         <activity android:name=".searchRecipesResult" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />
