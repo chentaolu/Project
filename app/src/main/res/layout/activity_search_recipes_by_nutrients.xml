@@ -12,6 +12,7 @@
 
         tools:context=".searchRecipesByNutrients">
 
+        
         <TextView
             android:id="@+id/max"
             android:layout_width="60dp"
