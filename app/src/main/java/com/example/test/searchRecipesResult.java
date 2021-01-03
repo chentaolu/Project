@@ -21,8 +21,6 @@ import java.util.List;
 
 public class searchRecipesResult extends AppCompatActivity {
 
-    private static final String ACTIVITY_TAG="LogDemo";
-
     private JSONObject result;
     private String baseImageURL;
     private List<String> ids = new ArrayList<String>();
@@ -53,8 +51,7 @@ public class searchRecipesResult extends AppCompatActivity {
         baseImageURL = getBaseImageURL(result);
         getIds(result);
         getTitles(result);
-        getImagesURL(result);
-        Log.w(searchRecipesResult.ACTIVITY_TAG, result.toString());
+        getImageURLs(result);
 
         LinearLayout searchResult = (LinearLayout) findViewById(R.id.searchResult);
         for (int i = 0; i < ids.size(); i++) {
@@ -72,6 +69,17 @@ public class searchRecipesResult extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ids.clear();
+        titles.clear();
+        images.clear();
+        imageURLs.clear();
+        allTitles.clear();
+        c.readDone = false;
+    }
+
     private String getBaseImageURL(JSONObject object) {
         String baseURL = "";
         try {
@@ -82,53 +90,54 @@ public class searchRecipesResult extends AppCompatActivity {
         return baseURL;
     }
 
-    private void getIds(JSONObject object) {
-        JSONArray results;
+    private void getIds (JSONObject result) {
+        JSONArray results = null;
         try {
-           results = object.getJSONArray("results");
-           for (int i = 0 ; i < result.length(); i++) {
-               try {
-                   JSONObject jsonObject = results.getJSONObject(i);
-                   ids.add(jsonObject.getString("id"));
-               } catch (Exception e) {
-                   e.printStackTrace();
-               }
-           }
-        } catch (Exception e) {
+            results = result.getJSONArray("Result");
+            for (int i = 0; i < results.length(); i++) {
+                try {
+                    JSONObject jsonObject = results.getJSONObject(i);
+                    ids.add(jsonObject.getString("id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void getTitles(JSONObject object) {
-        JSONArray results;
+    private void getTitles (JSONObject result) {
+        JSONArray results = null;
         try {
-            results = object.getJSONArray("results");
-            for (int i = 0 ; i < result.length(); i++) {
+            results = result.getJSONArray("Result");
+            for (int i = 0; i < results.length(); i++) {
                 try {
                     JSONObject jsonObject = results.getJSONObject(i);
                     titles.add(jsonObject.getString("title"));
-                } catch (Exception e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-        } catch (Exception e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void getImagesURL(JSONObject object) {
-        JSONArray results;
+    private void getImageURLs (JSONObject result) {
+        JSONArray results = null;
         try {
-            results = object.getJSONArray("results");
-            for (int i = 0 ; i < result.length(); i++) {
+            results = result.getJSONArray("Result");
+
+            for (int i = 0; i < results.length(); i++) {
                 try {
                     JSONObject jsonObject = results.getJSONObject(i);
-                    imageURLs.add(baseImageURL + jsonObject.getString("image"));
-                } catch (Exception e) {
+                    imageURLs.add(jsonObject.getString("image"));
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-        } catch (Exception e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -139,7 +148,6 @@ public class searchRecipesResult extends AppCompatActivity {
         public DownloadImageTask(ImageView bmImage) {
             this.bmImage = bmImage;
         }
-
         protected Bitmap doInBackground(String... urls) {
             String urldisplay = urls[0];
             Bitmap mIcon11 = null;
@@ -152,7 +160,6 @@ public class searchRecipesResult extends AppCompatActivity {
             }
             return mIcon11;
         }
-
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
         }

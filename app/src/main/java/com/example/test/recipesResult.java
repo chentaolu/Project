@@ -30,7 +30,7 @@ import java.util.List;
 
 public class recipesResult extends AppCompatActivity implements View.OnClickListener {
 
-    private JSONArray result;
+    private JSONObject result;
     private int clickNumber = 0;
     private List<String> ids = new ArrayList<String>();
     private List<String> titles = new ArrayList<String>();
@@ -41,7 +41,7 @@ public class recipesResult extends AppCompatActivity implements View.OnClickList
     private Runnable ReadJSONThread = new Runnable() {
         @Override
         public void run() {
-            result = c.ReadArray();
+            result = c.ReadMessage();
             c.readDone = true;
         }
     };
@@ -71,7 +71,6 @@ public class recipesResult extends AppCompatActivity implements View.OnClickList
         LinearLayout layout = new LinearLayout(this);
 
         this.addContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT));
-        layout.setOrientation(LinearLayout.VERTICAL);
         LinearLayout relative = (LinearLayout) findViewById(R.id.imgLayout);
 
         for(int i = 0; i < ids.size(); i++){
@@ -80,13 +79,12 @@ public class recipesResult extends AppCompatActivity implements View.OnClickList
             images.get(i).setId(300 + i);
             images.get(i).setOnClickListener(this);
             allTitle.get(i).setText(titles.get(i));
-            allTitle.get(i).setTextSize(50);
-            relative.addView(allTitle.get(i), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            relative.addView(allTitle.get(i));
 
             new recipesResult.DownloadImageTask(images.get(i))
                     .execute(imageURLs.get(i));
 
-            relative.addView(images.get(i), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            relative.addView(images.get(i));
         }
     }
 
@@ -138,36 +136,55 @@ public class recipesResult extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void getIds (JSONArray result) {
-        for (int i = 0; i < result.length(); i++) {
-            try {
-                JSONObject jsonObject = result.getJSONObject(i);
-                ids.add(jsonObject.getString("id"));
-            } catch (JSONException e) {
-                e.printStackTrace();
+    private void getIds (JSONObject result) {
+        JSONArray results = null;
+        try {
+            results = result.getJSONArray("Result");
+            for (int i = 0; i < results.length(); i++) {
+                try {
+                    JSONObject jsonObject = results.getJSONObject(i);
+                    ids.add(jsonObject.getString("id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
-    private void getImageURLs (JSONArray result) {
-        for (int i = 0; i < result.length(); i++) {
-            try {
-                JSONObject jsonObject = result.getJSONObject(i);
-                imageURLs.add(jsonObject.getString("image"));
-            } catch (JSONException e) {
-                e.printStackTrace();
+    private void getImageURLs (JSONObject result) {
+        JSONArray results = null;
+        try {
+            results = result.getJSONArray("Result");
+
+            for (int i = 0; i < results.length(); i++) {
+                try {
+                    JSONObject jsonObject = results.getJSONObject(i);
+                    imageURLs.add(jsonObject.getString("image"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
-    private void getTitles (JSONArray result) {
-        for (int i = 0; i < result.length(); i++) {
-            try {
-                JSONObject jsonObject = result.getJSONObject(i);
-                titles.add(jsonObject.getString("title"));
-            } catch (JSONException e) {
-                e.printStackTrace();
+    private void getTitles (JSONObject result) {
+        JSONArray results = null;
+        try {
+            results = result.getJSONArray("Result");
+            for (int i = 0; i < results.length(); i++) {
+                try {
+                    JSONObject jsonObject = results.getJSONObject(i);
+                    titles.add(jsonObject.getString("title"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

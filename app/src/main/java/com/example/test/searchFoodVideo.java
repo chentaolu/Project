@@ -30,11 +30,11 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
     private String YouTubeURL = "https://www.youtube.com/watch?v=";
     private WebView yt;
     private JSONObject result;
-    private List<ImageView> images;
-    private List<String> imageURLs;
-    private List<TextView> titles;
-    private List<String> shortTitles;
-    private List<String> youtubeIds;
+    private List<ImageView> images = new ArrayList<ImageView>();
+    private List<String> imageURLs = new ArrayList<String>();
+    private List<TextView> titles = new ArrayList<TextView>();
+    private List<String> shortTitles = new ArrayList<String>();
+    private List<String> youtubeIds = new ArrayList<String>();
 
     Client c = searchRecipes.c;
     private Runnable ReadJSONThread = new Runnable() {
@@ -59,11 +59,10 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
 
         LinearLayout videos = (LinearLayout) findViewById(R.id.videos);
 
-        imageURLs = getAllPicURL(result);
-        shortTitles = getTitle(result);
-        youtubeIds = getYouTubeURL(result);
-        images = new ArrayList<ImageView>();
-        titles = new ArrayList<TextView>();
+        getImageURLs(result);
+        getTitles(result);
+        getYouTubeURL(result);
+
 
         for (int i = 0; i < imageURLs.size(); i++) {
 
@@ -93,46 +92,56 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
         c.readDone = false;
     }
 
-    private List<String> getAllPicURL (JSONObject input) {
-        List<String> pictures = new ArrayList<String>();
+    private void getImageURLs (JSONObject result) {
+        JSONArray results = null;
         try {
-            JSONArray videos = input.getJSONArray("videos");
-            for (int i = 0; i < videos.length(); i++) {
-                JSONObject jsonObject = videos.getJSONObject(i);
-                pictures.add(jsonObject.getString("thumbnail"));
+            results = result.getJSONArray("Result");
+
+            for (int i = 0; i < results.length(); i++) {
+                try {
+                    JSONObject jsonObject = results.getJSONObject(i);
+                    imageURLs.add(jsonObject.getString("image"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return pictures;
     }
 
-    private List<String> getYouTubeURL (JSONObject input) {
-        List<String> YouTubeURLs = new ArrayList<String>();
+    private void getYouTubeURL (JSONObject input) {
+        JSONArray results = null;
         try {
-            JSONArray videos = input.getJSONArray("videos");
-            for (int i = 0; i < videos.length(); i++) {
-                JSONObject jsonObject = videos.getJSONObject(i);
-                YouTubeURLs.add(jsonObject.getString("youTubeId"));
+            results = result.getJSONArray("Result");
+            for (int i = 0; i < results.length(); i++) {
+                try {
+                    JSONObject jsonObject = results.getJSONObject(i);
+                    youtubeIds.add(jsonObject.getString("youtubeId"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return YouTubeURLs;
     }
 
-    private List<String> getTitle (JSONObject input) {
-        List<String> Titles = new ArrayList<String>();
+    private void getTitles (JSONObject result) {
+        JSONArray results = null;
         try {
-            JSONArray videos = input.getJSONArray("videos");
-            for (int i = 0; i < videos.length(); i++) {
-                JSONObject jsonObject = videos.getJSONObject(i);
-                Titles.add(jsonObject.getString("shortTitle"));
+            results = result.getJSONArray("Result");
+            for (int i = 0; i < results.length(); i++) {
+                try {
+                    JSONObject jsonObject = results.getJSONObject(i);
+                    shortTitles.add(jsonObject.getString("title"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return Titles;
     }
 
     @Override
