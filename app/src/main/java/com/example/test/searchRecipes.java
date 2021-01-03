@@ -6,10 +6,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -22,6 +24,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     private Button LoginButton;
     private String id;
     private static boolean firstCreate = true;
+    final String[] chooseNumber = {"10", "20", "30", "40", "50"};
     public static Boolean Login = false;
     private Runnable connectToServerThread = new Runnable() {
         @Override
@@ -53,13 +56,23 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_recipes);
+        Spinner spinner = (Spinner)findViewById(R.id.spinner);
         ((Button) findViewById(R.id.searchNutrientsButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchVieoButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchIngredientsButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchRecipeButton)).setOnClickListener(this);
+
+
+
         SearchFood = (EditText) findViewById(R.id.searchFood);
         SearchByIngredients = (EditText) findViewById(R.id.searchByIngredients);
         SearchFoodVideo = (EditText) findViewById(R.id.searchVideo);
+
+        ArrayAdapter<String> lunchList = new ArrayAdapter<>(searchRecipes.this,
+                android.R.layout.simple_spinner_dropdown_item,chooseNumber);
+        spinner.setAdapter(lunchList);
+
+
         if (firstCreate == true) {
             Thread connect = new Thread(connectToServerThread);
             connect.start();
