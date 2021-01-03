@@ -3,8 +3,10 @@ package com.example.test;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +31,8 @@ public class searchRecipesByNutrients extends AppCompatActivity implements View.
     private EditText ironMin;
     private EditText ironMax;
     Client c = searchRecipes.c;
+    final String[] chooseNumber = {"10", "20", "30", "40", "50"};
+
     private Runnable sendSearchRecipesByNutrientsThread = new Runnable() {
         @Override
         public void run() {
@@ -48,7 +52,7 @@ public class searchRecipesByNutrients extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_recipes_by_nutrients);
-
+        Spinner spinner = (Spinner)findViewById(R.id.spinner);
         mTextView = (TextView) findViewById(R.id.text);
         carbsMin = (EditText) findViewById(R.id.carbsMin);
         carbsMax = (EditText) findViewById(R.id.carbsMax);
@@ -67,6 +71,11 @@ public class searchRecipesByNutrients extends AppCompatActivity implements View.
         ironMin = (EditText) findViewById(R.id.ironMin);
         ironMax = (EditText) findViewById(R.id.ironMax);
         ((Button) findViewById(R.id.searchButton)).setOnClickListener(this);
+
+
+        ArrayAdapter<String> lunchList = new ArrayAdapter<>(searchRecipesByNutrients.this,
+                android.R.layout.simple_spinner_dropdown_item,chooseNumber);
+        spinner.setAdapter(lunchList);
     }
 
     @Override
