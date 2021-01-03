@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -72,9 +73,11 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
             new DownloadImageTask(images.get(i))
                     .execute(imageURLs.get(i));
             titles.get(i).setText(shortTitles.get(i));
-
+            titles.get(i).setTextColor(R.color.black);
+            titles.get(i).setTextSize(15);
+            titles.get(i).setGravity(Gravity.CENTER);
             images.get(i).setId(100 + i);
-
+            images.get(i).setForegroundGravity(Gravity.CENTER);
             images.get(i).setOnClickListener(this);
 
             videos.addView(titles.get(i));
