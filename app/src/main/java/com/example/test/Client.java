@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class Client {
     public static boolean readDone = false;
+    public static boolean LoginOrNot = false;
     private String ServerName;
     private int port;
     Socket client;

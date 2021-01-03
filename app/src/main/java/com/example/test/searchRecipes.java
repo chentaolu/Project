@@ -57,6 +57,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
         ((Button) findViewById(R.id.searchVieoButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchIngredientsButton)).setOnClickListener(this);
         ((Button) findViewById(R.id.searchRecipeButton)).setOnClickListener(this);
+        ((Button) findViewById(R.id.searchRandomButton)).setOnClickListener(this);
         SearchFood = (EditText) findViewById(R.id.searchFood);
         SearchByIngredients = (EditText) findViewById(R.id.searchByIngredients);
         SearchFoodVideo = (EditText) findViewById(R.id.searchVideo);
@@ -127,6 +128,10 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
                 break;
             case 25:
                 intent = new Intent(searchRecipes.this, Login.class);
+                startActivity(intent);
+                break;
+            case R.id.searchRandomButton:
+                intent = new Intent(searchRecipes.this, singleRecipe.class);
                 startActivity(intent);
                 break;
             default:
