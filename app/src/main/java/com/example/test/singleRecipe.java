@@ -37,8 +37,11 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
     private String servings;
     private JSONObject result;
     private JSONArray extendedIngredients;
+
+    private List<String> commandsIds = new ArrayList<String>();
     private List<String> Ingredients = new ArrayList<String>();
     private List<String> steps = new ArrayList<String>();
+    private List<String> commands = new ArrayList<String>();
     private TextView titleView;
     private TextView minuteView;
     private TextView idView;
@@ -92,6 +95,8 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
         getServings(result);
         getAllExtendedIngredients(result);
         getAnalyzedInstructions(result);
+        getCommandsId(result);
+        getCommands(result);
 
         LinearLayout allPage = (LinearLayout) findViewById(R.id.allPage);
         LinearLayout basePart = (LinearLayout) findViewById(R.id.basePart);
@@ -148,6 +153,30 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(singleRecipe.this, "你尚未登入",Toast.LENGTH_SHORT).show();
         } else if (clickNumber == R.id.sendCommandButton && Login) {
             sendMessage = commandInput.getText().toString().trim();
+        }
+    }
+
+    private void getCommandsId(JSONObject result) {
+        try {
+            JSONArray comments = result.getJSONArray("comments");
+            for (int i = 0; i < comments.length(); i++) {
+                JSONObject object = comments.getJSONObject(i);
+                commandsIds.add(object.getString("id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getCommands(JSONObject result) {
+        try {
+            JSONArray comments = result.getJSONArray("comments");
+            for (int i = 0; i < comments.length(); i++) {
+                JSONObject object = comments.getJSONObject(i);
+                commands.add(object.getString("message"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

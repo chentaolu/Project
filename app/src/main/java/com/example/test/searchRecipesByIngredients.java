@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -76,6 +77,7 @@ public class searchRecipesByIngredients extends AppCompatActivity implements Vie
             images.add(new ImageView(this));
 
             allTitles.get(i).setText(titles.get(i));
+            allTitles.get(i).setGravity(Gravity.CENTER);
             new searchRecipesByIngredients.DownloadImageTask(images.get(i))
                     .execute(imageURLs.get(i));
 

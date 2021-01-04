@@ -74,6 +74,7 @@ public class searchRandomRecipe extends AppCompatActivity implements View.OnClic
         getImageURLs(result);
 
         LinearLayout searchResult = (LinearLayout) findViewById(R.id.searchRandomResult);
+        searchResult.setGravity(Gravity.CENTER);
         for(int i = 0; i < ids.size(); i++){
             allTitles.add(new TextView(this));
             images.add(new ImageView(this));

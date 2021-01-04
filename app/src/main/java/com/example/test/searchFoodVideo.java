@@ -73,6 +73,7 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
         getYouTubeURL(result);
 
 
+
         for (int i = 0; i < imageURLs.size(); i++) {
 
             titles.add(new TextView(this));
