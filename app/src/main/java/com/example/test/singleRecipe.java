@@ -45,12 +45,17 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
     private List<String> Ingredients = new ArrayList<String>();
     private List<String> steps = new ArrayList<String>();
     private List<String> commands = new ArrayList<String>();
+
     private TextView titleView;
     private TextView minuteView;
+
     private TextView idView;
     private TextView setView1;
     private TextView setView2;
     private ImageView ImageView;
+
+    private List<TextView> stepCount = new ArrayList<TextView>();
+
     private List<TextView> ingredientsView = new ArrayList<TextView>();
     private List<TextView> stepsView = new ArrayList<TextView>();
     private List<TextView> commandsView = new ArrayList<TextView>();
@@ -123,8 +128,12 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
 
         if(Login){
             idView.setText(com.example.test.Login.id);
+            idView.setGravity(Gravity.CENTER_VERTICAL);
+            idView.setTextSize(20);
         } else{
             idView.setText("訪客");
+            idView.setGravity(Gravity.CENTER_VERTICAL);
+            idView.setTextSize(20);
         }
         setView1.setText("Ingredients:");
         for(int i = 0; i < Ingredients.size(); i++){
@@ -134,8 +143,12 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
         }
         setView2.setText("Steps:");
         for(int i = 0; i < steps.size(); i++){
+            stepCount.add(new TextView(this));
             stepsView.add(new TextView(this));
+            int count = i+1;
+            stepCount.get(i).setText("step " + count + ":");
             stepsView.get(i).setText(steps.get(i));
+            dynamicPart2.addView(stepCount.get(i));
             dynamicPart2.addView(stepsView.get(i));
         }
     }
