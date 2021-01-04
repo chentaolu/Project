@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,14 +37,20 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
     private String servings;
     private JSONObject result;
     private JSONArray extendedIngredients;
+
     private List<String> commandsIds = new ArrayList<String>();
-    private List<String> prepareFood = new ArrayList<String>();
     private List<String> Ingredients = new ArrayList<String>();
     private List<String> steps = new ArrayList<String>();
     private List<String> commands = new ArrayList<String>();
     private TextView titleView;
+    private TextView minuteView;
+    private TextView idView;
+    private TextView setView1;
+    private TextView setView2;
     private ImageView ImageView;
-    private List<TextView> prepareFoodView = new ArrayList<TextView>();
+
+
+    private List<TextView> ingredientsView = new ArrayList<TextView>();
     private List<TextView> stepsView = new ArrayList<TextView>();
     private List<TextView> commandsView = new ArrayList<TextView>();
     boolean Login = searchRecipes.Login;
@@ -59,7 +66,11 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_recipe);
+        idView =  ((TextView) findViewById(R.id.idView));
+        setView1 =  ((TextView) findViewById(R.id.extendedIngredient));
+        setView2 =  ((TextView) findViewById(R.id.steps));
         titleView = ((TextView) findViewById(R.id.singleTitleView));
+        minuteView = ((TextView) findViewById(R.id.prepareMin));
         ImageView = ((ImageView) findViewById(R.id.singleImageView));
         ((Button) findViewById(R.id.sendCommandButton)).setOnClickListener(this);
         commandInput = ((EditText) findViewById(R.id.commandText));
@@ -87,14 +98,39 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
         getCommandsId(result);
         getCommands(result);
 
+        LinearLayout allPage = (LinearLayout) findViewById(R.id.allPage);
+        LinearLayout basePart = (LinearLayout) findViewById(R.id.basePart);
+        LinearLayout dynamicPart1 = (LinearLayout) findViewById(R.id.dynamicPart1);
+        LinearLayout dynamicPart2 = (LinearLayout) findViewById(R.id.dynamicPart2);
+        LinearLayout respondPart = (LinearLayout) findViewById(R.id.respondPart);
+
         titleView.setText(title);
         titleView.setTextSize(25);
-
+        titleView.setGravity(Gravity.CENTER);
+        minuteView.setText("prepare time: " + readyInMinutes + " minutes, serving: " + servings);
+        minuteView.setTextSize(20);
         new singleRecipe.DownloadImageTask(ImageView)
                 .execute(imageURL);
 
-        /*LinearLayout searchResult = (LinearLayout) findViewById(R.id.singleLayout);
-        prepareFoodView.add(new TextView(this));
+        if(Login){
+            idView.setText(com.example.test.Login.id);
+        } else{
+            idView.setText("訪客");
+        }
+        setView1.setText("Ingredients:");
+        for(int i = 0; i < Ingredients.size(); i++){
+            ingredientsView.add(new TextView(this));
+            ingredientsView.get(i).setText(Ingredients.get(i));
+            dynamicPart1.addView(ingredientsView.get(i));
+        }
+        setView2.setText("Steps:");
+        for(int i = 0; i < steps.size(); i++){
+            stepsView.add(new TextView(this));
+            stepsView.get(i).setText(steps.get(i));
+            dynamicPart2.addView(stepsView.get(i));
+        }
+
+        /*prepareFoodView.add(new TextView(this));
         prepareFoodView.get(0).setText("Ingredients");
         prepareFoodView.get(0).setTextSize(20);
         searchResult.addView(prepareFoodView.get(0));

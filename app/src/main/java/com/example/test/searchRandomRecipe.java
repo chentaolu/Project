@@ -79,7 +79,8 @@ public class searchRandomRecipe extends AppCompatActivity implements View.OnClic
             allTitles.add(new TextView(this));
             images.add(new ImageView(this));
 
-            allTitles.get(i).setTextSize(15);
+            allTitles.get(i).setTextSize(20);
+            allTitles.get(i).setGravity(Gravity.CENTER);
             images.get(i).setId(700 + i);
             images.get(i).setOnClickListener(this);
 

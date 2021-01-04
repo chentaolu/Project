@@ -83,7 +83,7 @@ public class searchFoodVideo extends AppCompatActivity implements View.OnClickLi
                     .execute(imageURLs.get(i));
             titles.get(i).setText(shortTitles.get(i));
             titles.get(i).setTextColor(R.color.black);
-            titles.get(i).setTextSize(15);
+            titles.get(i).setTextSize(20);
             titles.get(i).setGravity(Gravity.CENTER);
             images.get(i).setId(100 + i);
             images.get(i).setForegroundGravity(Gravity.CENTER);
