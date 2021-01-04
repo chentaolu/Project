@@ -8,10 +8,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 public class singleRecipe extends AppCompatActivity implements View.OnClickListener {
 
-    EditText commandInput;
+    private JSONObject result;
+    private EditText commandInput;
     Client c = searchRecipes.c;
+    private Runnable ReadJSONThread = new Runnable() {
+        @Override
+        public void run() {
+            result = c.ReadMessage();
+            c.readDone = true;
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

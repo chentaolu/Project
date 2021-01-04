@@ -28,6 +28,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class recipesResult extends AppCompatActivity implements View.OnClickListener {
 
     private JSONObject result;
@@ -61,7 +63,13 @@ public class recipesResult extends AppCompatActivity implements View.OnClickList
         Thread getResult = new Thread(ReadJSONThread);
         getResult.start();
 
-        while(!c.readDone);
+        while(!c.readDone) {
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        };
         c.readDone = false;
 
         getIds(result);

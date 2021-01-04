@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import static java.lang.Thread.sleep;
+
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
     public static String id = "";
@@ -60,7 +62,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     //-----------------------------------------------------------------------
                     Thread confirmFromServer = new Thread(confirmThread);
                     confirmFromServer.start();
-                    while (!c.readDone);
+                    while (!c.readDone) {
+                        sleep(1000);
+                    };
                     c.readDone = false;
                     if (confirm.getString("status").equals("success")) {
                         searchRecipes.Login = true;
