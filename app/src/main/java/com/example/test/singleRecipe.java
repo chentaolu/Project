@@ -55,10 +55,10 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
     private ImageView ImageView;
 
     private List<TextView> stepCount = new ArrayList<TextView>();
-
+    private List<TextView> commandsIdView = new ArrayList<TextView>();
+    private List<TextView> commandsView = new ArrayList<TextView>();
     private List<TextView> ingredientsView = new ArrayList<TextView>();
     private List<TextView> stepsView = new ArrayList<TextView>();
-    private List<TextView> commandsView = new ArrayList<TextView>();
     boolean Login = searchRecipes.Login;
     Client c = searchRecipes.c;
     private Runnable ReadJSONThread = new Runnable() {
@@ -117,6 +117,7 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
         LinearLayout dynamicPart1 = (LinearLayout) findViewById(R.id.dynamicPart1);
         LinearLayout dynamicPart2 = (LinearLayout) findViewById(R.id.dynamicPart2);
         LinearLayout respondPart = (LinearLayout) findViewById(R.id.respondPart);
+        LinearLayout command = (LinearLayout) findViewById(R.id.command);
 
         titleView.setText(title);
         titleView.setTextSize(25);
@@ -151,6 +152,18 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
             dynamicPart2.addView(stepCount.get(i));
             dynamicPart2.addView(stepsView.get(i));
         }
+
+        for(int i = 0; i < commandsIds.size(); i++){
+            commandsIdView.add(new TextView(this));
+            commandsView.add(new TextView(this));
+            
+            commandsIdView.get(i).setText(commandsIds.get(i));
+            commandsView.get(i).setText(commands.get(i));
+            command.addView(commandsIdView.get(i));
+            command.addView(commandsView.get(i));
+
+        }
+
     }
 
     @Override
