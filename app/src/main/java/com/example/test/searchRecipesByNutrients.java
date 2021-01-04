@@ -102,7 +102,7 @@ public class searchRecipesByNutrients extends AppCompatActivity implements View.
                 sugarMin.setText(null);
                 sugarMax.setText(null);
                 ironMin.setText(null);
-                ironMin.setText(null);
+                ironMax.setText(null);
                 intent = new Intent(searchRecipesByNutrients.this, recipesResult.class);
                 startActivity(intent);
                 break;

@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -80,7 +81,7 @@ public class recipesResult extends AppCompatActivity implements View.OnClickList
 
         this.addContentView(layout, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.FILL_PARENT));
         LinearLayout relative = (LinearLayout) findViewById(R.id.imgLayout);
-
+        relative.setGravity(Gravity.CENTER);
         for(int i = 0; i < ids.size(); i++){
             allTitle.add(new TextView(this));
             images.add(new ImageView(this));

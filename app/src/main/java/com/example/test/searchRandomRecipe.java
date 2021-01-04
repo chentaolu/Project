@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -73,6 +74,7 @@ public class searchRandomRecipe extends AppCompatActivity implements View.OnClic
         getImageURLs(result);
 
         LinearLayout searchResult = (LinearLayout) findViewById(R.id.searchRandomResult);
+        searchResult.setGravity(Gravity.CENTER);
         for(int i = 0; i < ids.size(); i++){
             allTitles.add(new TextView(this));
             images.add(new ImageView(this));
