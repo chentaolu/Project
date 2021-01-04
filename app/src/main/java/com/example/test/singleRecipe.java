@@ -89,7 +89,7 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
         new singleRecipe.DownloadImageTask(ImageView)
                 .execute(imageURL);
 
-        LinearLayout searchResult = (LinearLayout) findViewById(R.id.singleLayout);
+        /*LinearLayout searchResult = (LinearLayout) findViewById(R.id.singleLayout);
         prepareFoodView.add(new TextView(this));
         prepareFoodView.get(0).setText("Ingredients");
         prepareFoodView.get(0).setTextSize(20);
@@ -100,7 +100,7 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
             prepareFoodView.get(i).setText(prepareFood.get(i));
             prepareFoodView.get(i).setTextSize(15);
             searchResult.addView(prepareFoodView.get(i));
-        }
+        }*/
 
 
     }
