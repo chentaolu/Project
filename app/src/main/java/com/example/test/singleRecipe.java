@@ -22,7 +22,9 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.lang.Thread.sleep;
 
@@ -35,9 +37,10 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
     private String summary;
     private String imageURL;
     private String servings;
+    private String recipeId;
+    private String sendCommand;
     private JSONObject result;
     private JSONArray extendedIngredients;
-
     private List<String> commandsIds = new ArrayList<String>();
     private List<String> Ingredients = new ArrayList<String>();
     private List<String> steps = new ArrayList<String>();
@@ -52,6 +55,7 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
     private ImageView ImageView;
 
     private List<TextView> stepCount = new ArrayList<TextView>();
+
     private List<TextView> ingredientsView = new ArrayList<TextView>();
     private List<TextView> stepsView = new ArrayList<TextView>();
     private List<TextView> commandsView = new ArrayList<TextView>();
@@ -64,6 +68,13 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
             c.readDone = true;
         }
     };
+    private Runnable sendCommandThread = new Runnable() {
+        @Override
+        public void run() {
+            c.SendCommandMessage(c, "sendComment", recipeId, com.example.test.Login.id, sendCommand);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +100,7 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
         };
         c.readDone = false;
 
+        getRecipeID(result);
         getTitle(result);
         getReadyInMinutes(result);
         getSourceUrl(result);
@@ -139,30 +151,56 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
             dynamicPart2.addView(stepCount.get(i));
             dynamicPart2.addView(stepsView.get(i));
         }
-
-        /*prepareFoodView.add(new TextView(this));
-        prepareFoodView.get(0).setText("Ingredients");
-        prepareFoodView.get(0).setTextSize(20);
-        searchResult.addView(prepareFoodView.get(0));
-
-        for (int i = 0; i < prepareFood.size(); i++) {
-            prepareFoodView.add(new TextView(this));
-            prepareFoodView.get(i).setText(prepareFood.get(i));
-            prepareFoodView.get(i).setTextSize(15);
-            searchResult.addView(prepareFoodView.get(i));
-        }*/
-
-
     }
 
     @Override
     public void onClick(View v) {
         int clickNumber = v.getId();
-        String sendMessage = "";
         if (clickNumber == R.id.sendCommandButton && Login) {
             Toast.makeText(singleRecipe.this, "你尚未登入",Toast.LENGTH_SHORT).show();
         } else if (clickNumber == R.id.sendCommandButton && Login) {
-            sendMessage = commandInput.getText().toString().trim();
+            sendCommand = commandInput.getText().toString().trim();
+            if (sendCommand.equals("")) {
+                Toast.makeText(singleRecipe.this, "請填入評論",Toast.LENGTH_SHORT).show();
+            } else {
+                commandInput.setText(null);
+                Thread sendJson = new Thread(sendCommandThread);
+                sendJson.start();
+                finish();
+                startActivity(getIntent());
+            }
+
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        title = "";
+        readyInMinutes = "";
+        sourceUrl = "";
+        summary = "";
+        imageURL = "";
+        servings = "";
+        recipeId = "";
+        sendCommand = "";
+        result = null;
+        extendedIngredients = null;
+        commandsIds.clear();
+        Ingredients.clear();
+        steps.clear();
+        commands.clear();
+        ingredientsView.clear();
+        steps.clear();
+        commandsView.clear();
+        c.readDone = false;
+    }
+
+    private void getRecipeID(JSONObject result) {
+        try {
+            recipeId = result.getString("id");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
