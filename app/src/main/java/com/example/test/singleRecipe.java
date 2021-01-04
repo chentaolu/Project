@@ -143,9 +143,9 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int clickNumber = v.getId();
-        if (clickNumber == R.id.sendCommandButton && Login) {
+        if (clickNumber == R.id.sendCommandButton && Login == false) {
             Toast.makeText(singleRecipe.this, "你尚未登入",Toast.LENGTH_SHORT).show();
-        } else if (clickNumber == R.id.sendCommandButton && Login) {
+        } else if (clickNumber == R.id.sendCommandButton && Login == true) {
             sendCommand = commandInput.getText().toString().trim();
             if (sendCommand.equals("")) {
                 Toast.makeText(singleRecipe.this, "請填入評論",Toast.LENGTH_SHORT).show();
