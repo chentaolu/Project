@@ -63,7 +63,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                                 Thread confirmFromServer = new Thread(confirmThread);
                                 confirmFromServer.start();
                                 while (!c.readDone) {
-                                    Log.v(Register.ACTIVITY_TAG, "wait server");
+                                    try {
+                                        sleep(1000);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 };
                                 c.readDone = false;
                                 if (confirm.getString("status").equals("success")) {

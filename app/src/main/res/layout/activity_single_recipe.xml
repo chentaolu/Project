@@ -6,46 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".singleRecipe">
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="72dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="16dp">
+        tools:layout_editor_absoluteX="38dp">
+
+
+
+
+        <TextView
+            android:id="@+id/singleTitleView"
+            android:layout_width="193dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="32dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/idView"
+            android:layout_width="150dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/commandText"
+            android:layout_width="150dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        </EditText>
+
+        <Button
+            android:id="@+id/sendCommandButton"
+            android:layout_width="67dp"
+            android:layout_height="39dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/send_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/singleImageView"
+            android:layout_width="372dp"
+            android:layout_height="228dp"
+            tools:layout_editor_absoluteX="23dp"
+            tools:layout_editor_absoluteY="97dp"
+            />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:id="@+id/singleLayout"
+            android:layout_width="371dp"
+            android:layout_height="278dp"
+            android:layout_marginTop="344dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:id="@+id/idView"
-        android:layout_width="150dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="24dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/commandText"
-        android:layout_width="150dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-    </EditText>
-
-    <Button
-        android:id="@+id/sendCommandButton"
-        android:layout_width="67dp"
-        android:layout_height="39dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/send_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
