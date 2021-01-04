@@ -100,6 +100,26 @@ public class Client {
         }
     }
 
+    public void SendCommandMessage(Client c, String function, String recipeID, String id, String message) {
+        JSONObject sendMessage = null;
+        try {
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("function", function);
+            map.put("recipeID", recipeID);
+            map.put("id", id);
+            map.put("message", message);
+            sendMessage = new JSONObject(map);
+            String jsonString = "";
+
+            jsonString = sendMessage.toString();
+            OutputStream outToServer = c.getSocket().getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+            out.writeUTF(jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public JSONObject ReadMessage() {
         String read = "";
         JSONObject input = null;
