@@ -77,6 +77,7 @@ public class searchRecipesByIngredients extends AppCompatActivity implements Vie
             images.add(new ImageView(this));
 
             allTitles.get(i).setText(titles.get(i));
+            allTitles.get(i).setTextSize(20);
             allTitles.get(i).setGravity(Gravity.CENTER);
             new searchRecipesByIngredients.DownloadImageTask(images.get(i))
                     .execute(imageURLs.get(i));
