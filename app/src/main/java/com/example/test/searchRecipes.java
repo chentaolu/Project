@@ -31,7 +31,7 @@ public class searchRecipes extends AppCompatActivity implements View.OnClickList
     private Runnable connectToServerThread = new Runnable() {
         @Override
         public void run() {
-            c = new Client("4.tcp.ngrok.io", 19636);
+            c = new Client("54.165.78.20", 4567);
         }
     };
     private Runnable sendRecipeMessageThread = new Runnable() {

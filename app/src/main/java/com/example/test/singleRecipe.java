@@ -117,8 +117,11 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
         LinearLayout dynamicPart1 = (LinearLayout) findViewById(R.id.dynamicPart1);
         LinearLayout dynamicPart2 = (LinearLayout) findViewById(R.id.dynamicPart2);
         LinearLayout respondPart = (LinearLayout) findViewById(R.id.respondPart);
-        LinearLayout command = (LinearLayout) findViewById(R.id.command);
-
+        LinearLayout allCommand = (LinearLayout) findViewById(R.id.allCommand);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+        lp.setMargins(60,0,0,0);
+        lp2.setMargins(30,0,0,0);
         titleView.setText(title);
         titleView.setTextSize(25);
         titleView.setGravity(Gravity.CENTER);
@@ -136,31 +139,39 @@ public class singleRecipe extends AppCompatActivity implements View.OnClickListe
             idView.setGravity(Gravity.CENTER_VERTICAL);
             idView.setTextSize(20);
         }
-        setView1.setText("Ingredients:");
+        setView1.setText("Ingredients");
         for(int i = 0; i < Ingredients.size(); i++){
             ingredientsView.add(new TextView(this));
             ingredientsView.get(i).setText(Ingredients.get(i));
+            ingredientsView.get(i).setTextSize(20);
+            ingredientsView.get(i).setLayoutParams(lp);
             dynamicPart1.addView(ingredientsView.get(i));
         }
-        setView2.setText("Steps:");
+        setView2.setText("Steps");
         for(int i = 0; i < steps.size(); i++){
             stepCount.add(new TextView(this));
             stepsView.add(new TextView(this));
             int count = i+1;
             stepCount.get(i).setText("step " + count + ":");
+            stepCount.get(i).setTextSize(20);
+            stepCount.get(i).setLayoutParams(lp2);
             stepsView.get(i).setText(steps.get(i));
+            stepsView.get(i).setTextSize(18);
+            stepsView.get(i).setLayoutParams(lp);
             dynamicPart2.addView(stepCount.get(i));
             dynamicPart2.addView(stepsView.get(i));
         }
 
         for(int i = 0; i < commandsIds.size(); i++){
             commandsIdView.add(new TextView(this));
-            commandsView.add(new TextView(this));
-            
-            commandsIdView.get(i).setText(commandsIds.get(i));
-            commandsView.get(i).setText(commands.get(i));
-            command.addView(commandsIdView.get(i));
-            command.addView(commandsView.get(i));
+            //commandsView.add(new TextView(this));
+            commandsIdView.get(i).setTextSize(18);
+            //commandsView.get(i).setTextSize(18);
+            commandsIdView.get(i).setText(commandsIds.get(i)+": " + commands.get(i));
+            commandsIdView.get(i).setLayoutParams(lp);
+            //commandsView.get(i).setText(commands.get(i));
+            allCommand.addView(commandsIdView.get(i));
+            //idAndCommand.addView(commandsView.get(i));
 
         }
 
