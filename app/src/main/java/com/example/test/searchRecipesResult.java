@@ -78,6 +78,8 @@ public class searchRecipesResult extends AppCompatActivity implements View.OnCli
             allTitles.add(new TextView(this));
             images.add(new ImageView(this));
 
+            allTitles.get(i).setTextSize(20);
+
             allTitles.get(i).setTextSize(15);
             allTitles.get(i).setGravity(Gravity.CENTER);
             images.get(i).setId(200 + i);
